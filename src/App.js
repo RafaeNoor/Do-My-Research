@@ -11,6 +11,7 @@ import {
 } from "react-router-dom";
 import Container from "react-bootstrap/Container";
 import AboutPage from "./pages/AboutPage";
+import LandingPage from "./pages/LandingPage";
 
 
 function App() {
@@ -21,6 +22,9 @@ function App() {
             <Switch>
               <Route path={"/about"}>
                   <AboutPage/>
+              </Route>
+              <Route path={"/"}>
+                <LandingPage/>
               </Route>
             </Switch>
           </Container>
