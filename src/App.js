@@ -12,13 +12,15 @@ import {
 import Container from "react-bootstrap/Container";
 import AboutPage from "./pages/AboutPage";
 import LandingPage from "./pages/LandingPage";
+import Header from "./components/Header";
 
 
 function App() {
   return (
     <div className="App">
         <Router>
-          <Container>
+          <Container fluid>
+            <Header/>
             <Switch>
               <Route path={"/about"}>
                   <AboutPage/>

@@ -13,7 +13,7 @@ class AboutPage extends React.Component {
     render() {
         return (
             <div>
-                <Container>
+                <Container fluid>
                     <h1>About Page!</h1>
                 </Container>
             </div>
