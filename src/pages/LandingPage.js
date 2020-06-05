@@ -42,9 +42,29 @@ class LandingPage extends React.Component {
                                 console.log(data)
                                 this.setState({'summary':data.summary});
                             });
-
                         }
                         }>Submit</Button>
+                        <br/>
+                        <Form.Control size="lg" type="text" placeholder="Enter PHRASE to Google" onChange={
+                            e=>this.state.text = (e.target.value)} />
+
+                        <Button onClick={() => {
+                            console.log(this.state.text);
+                            fetch(`/search/${this.state.text}`).then(res => res.json()).then(data => {
+                                console.log(JSON.stringify(data));
+                                let items = data.items
+                                let urls = []
+                                items.forEach(item => {
+                                    urls.push(item.formattedUrl);
+                                })
+
+                                console.log(urls)
+
+                                this.setState({'summary':JSON.stringify(urls)});
+                            });
+                        }
+                        }>Submit</Button>
+
                     </Form.Group>
                     {this.state.summary}
 
