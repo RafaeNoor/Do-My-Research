@@ -1,0 +1,8 @@
+search_tweets_api:
+  account_type: premium
+  endpoint: https://api.twitter.com/1.1/tweets/search/30day/Feminism.json
+  consumer_key: 3SJ95U4vRbSF1YyHya4MkWPhv
+  consumer_secret: WzkQU6hytgIlYOuqkM8zsk7wrSrLafmrVRie32Ilw73w1i7lwF
+  bearer_token: AAAAAAAAAAAAAAAAAAAAAJnXDwEAAAAAg7CfATeFy6xeKOrY7SOJB8zMEm8%3DFvY188JsUbt1Aha46myuCCE6WqTXMrZA43L7wfJmJ9liVHyapN
+
+

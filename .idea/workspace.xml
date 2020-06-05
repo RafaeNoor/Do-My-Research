@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f35dfca5-6b06-4331-ac3b-2f83ca7fc56d" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api/api.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/api.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/LandingPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/LandingPage.js" afterDir="false" />
@@ -64,7 +65,8 @@
       <workItem from="1591309193223" duration="45000" />
       <workItem from="1591309515197" duration="2462000" />
       <workItem from="1591353043208" duration="292000" />
-      <workItem from="1591354235583" duration="5700000" />
+      <workItem from="1591354235583" duration="6029000" />
+      <workItem from="1591370447215" duration="3881000" />
     </task>
     <servers />
   </component>
@@ -80,5 +82,9 @@
       <screen x="0" y="23" width="1440" height="827" />
     </state>
     <state x="880" y="245" key="#com.intellij.fileTypes.FileTypeChooser/0.23.1440.827@0.23.1440.827" timestamp="1591310542441" />
+    <state x="383" y="172" width="672" height="678" key="search.everywhere.popup" timestamp="1591370951669">
+      <screen x="0" y="23" width="1440" height="828" />
+    </state>
+    <state x="383" y="172" width="672" height="678" key="search.everywhere.popup/0.23.1440.828@0.23.1440.828" timestamp="1591370951669" />
   </component>
 </project>

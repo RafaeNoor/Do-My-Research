@@ -1,0 +1,8 @@
+search_tweets_api:
+  account_type: premium
+  endpoint: https://api.twitter.com/1.1/tweets/search/fullarchive/DoMyResearch.json
+  consumer_key: gra8aO1Cjq83LJxS3V3JXNnrR
+  consumer_secret: pQmBG2LDNdqVNtXCD95Va6wvHPP7KUnOZYiAinrbJNjghZxDbY
+  bearer_token: AAAAAAAAAAAAAAAAAAAAAN%2B%2FEwEAAAAA3S7MAJZIghspbFFGoVrfVoMByas%3DVeEA9pITxljpFe3ySevE063xIlHuVHbtEFwVbfugh2vFwm6Kw9
+
+
