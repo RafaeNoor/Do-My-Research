@@ -2,7 +2,17 @@ import subprocess as sb
 import os,sys
 import json
 import pandas as pd
+import glob
 
+import random
+import string
+import time
+
+random.seed(time.time())
+
+def randomString(stringLength=8):
+    letters = string.ascii_lowercase
+    return ''.join(random.choice(letters) for i in range(stringLength))
 
 
 
@@ -29,17 +39,21 @@ def search_for_phrase(phrase):
 
     file_name = os.path.join(dir_path,phrase)
 
-    CMD = 'search_tweets.py --max-results 200 --results-per-call 100 --filter-rule "'+phrase+'" --filename-prefix '+file_name+' --print-stream --credential-file twitter_api_info.yaml'
+    CMD = 'search_tweets.py --max-results 200 --results-per-call 100 --filter-rule "'+phrase+'" --filename-prefix '+file_name+"_"+randomString()+' --print-stream --credential-file twitter_api_info.yaml'
     print(CMD)
     sb.call(CMD,shell=True)
 
     # Call process tweet on collected tweets
     objects = []
-    with open(file_name+".json","r") as readFile:
-        for line in readFile:
-            objects.append(json.loads(line))
+    files = glob.glob(dir_path+"/*.json")
+    print(files)
+    for file in files:
+        with open(file,"r") as readFile:
+            for line in readFile:
+                objects.append(json.loads(line))
 
-    print(objects)
+
+    #print(objects)
     df = produce_csv(objects,dir_path)
 
     return df.to_dict()

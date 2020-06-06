@@ -3,9 +3,9 @@ let firebase_obj = require('../FirebaseConfig');
 
 function union_arrays (x, y) {
     var obj = {};
-    for (var i = x.length-1; i >= 0; -- i)
+    for (let i = x.length-1; i >= 0; -- i)
         obj[x[i]] = x[i];
-    for (var i = y.length-1; i >= 0; -- i)
+    for (let i = y.length-1; i >= 0; -- i)
         obj[y[i]] = y[i];
     var res = []
     for (var k in obj) {
