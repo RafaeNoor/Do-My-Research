@@ -6,6 +6,8 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
+import Table from "react-bootstrap/Table";
+import TwitterAnalysisResults from "../components/TwitterAnalysisResults";
 
 
 class LandingPage extends React.Component {
@@ -24,6 +26,50 @@ class LandingPage extends React.Component {
             console.log(data)
             this.setState({'currentTime':data.time});
         });
+    }
+
+    createTable(json_obj){
+        //json_obj = JSON.parse(json_obj);
+        let uids = Object.keys(json_obj)
+
+        let field_names = Object.keys(json_obj[uids[0]])
+
+        let table_rows = []
+
+        uids.forEach(uid => {
+            let entry = json_obj[uid];
+            let table_fields = [];
+
+            field_names.forEach(field => {
+                table_fields.push(<td>{entry[field]}</td>);
+            })
+            let row = (
+                <tr>
+                    {table_fields}
+                </tr>
+            );
+
+            table_rows.push(row);
+        });
+
+        let table_header = [];
+
+        field_names.forEach(field => {
+            table_header.push(<th>{field}</th>);
+        })
+        return (
+            <Table striped bordered hover variant="dark">
+                <thead>
+                <tr>
+                    {table_header}
+                </tr>
+                </thead>
+                <tbody>
+                {table_rows}
+                </tbody>
+            </Table>
+
+        );
     }
 
 
@@ -76,7 +122,7 @@ class LandingPage extends React.Component {
 
                                         console.log(urls)
 
-                                        this.setState({'summary':JSON.stringify(urls)});
+                                        this.setState({'summary':JSON.stringify(urls,null,4)});
                                     });
                                 }
                                 }>Submit</Button>
@@ -92,9 +138,17 @@ class LandingPage extends React.Component {
 
                                 <Button onClick={() => {
                                     console.log(this.state.text);
+                                    console.log('Check');
                                     fetch(`/tweet_search/${this.state.text}`).then(res => res.json()).then(data => {
-                                        console.log(data)
-                                        this.setState({'summary':JSON.stringify(data)});
+                                        //this.setState({'summary':this.createTable(data.data)});//JSON.stringify(data,null,4)});
+                                        //console.log(data.file_paths)
+                                        let component = (
+                                            <Container fluid>
+                                                <TwitterAnalysisResults table_data={data.data} file_paths={data.file_paths} />
+                                            </Container>
+
+                                        );
+                                        this.setState({'summary':component});
                                     });
                                 }
                                 }>Submit</Button>

@@ -8,7 +8,14 @@ import random
 import string
 import time
 
+import gender_guesser.detector as gender
+
+import process_tweet_data as process
+
+gender_detector = gender.Detector(case_sensitive=False)
+
 random.seed(time.time())
+i = 0
 
 def randomString(stringLength=8):
     letters = string.ascii_lowercase
@@ -24,24 +31,29 @@ tweet_search_file = Blueprint('tweet_search_file',__name__)
 
 
 def create_dir_for_phrase(phrase):
-    if not os.path.isdir("work_dir"):
-        os.mkdir("work_dir")
+    if not os.path.isdir("static"):
+        os.mkdir("static")
 
-    if not os.path.isdir(os.path.join("work_dir",phrase)):
-        os.mkdir(os.path.join("work_dir",phrase))
+    if not os.path.isdir(os.path.join("static",phrase)):
+        os.mkdir(os.path.join("static",phrase))
 
-    return os.path.join("work_dir",phrase)
+    return os.path.join("static",phrase)
 
 
 @tweet_search_file.route('/tweet_search/<string:phrase>')
 def search_for_phrase(phrase):
+    phrase = phrase.lower()
     dir_path = create_dir_for_phrase(phrase)
 
     file_name = os.path.join(dir_path,phrase)
 
     CMD = 'search_tweets.py --max-results 200 --results-per-call 100 --filter-rule "'+phrase+'" --filename-prefix '+file_name+"_"+randomString()+' --print-stream --credential-file twitter_api_info.yaml'
     print(CMD)
-    sb.call(CMD,shell=True)
+    try:
+        #sb.call(CMD,shell=True)
+        print("Hello")
+    except:
+        print("Used Up Quota")
 
     # Call process tweet on collected tweets
     objects = []
@@ -55,8 +67,15 @@ def search_for_phrase(phrase):
 
     #print(objects)
     df = produce_csv(objects,dir_path)
+    #process.process_gender(df)
+    file_paths = process.do_complete_analysis(df,dir_path,phrase)
 
-    return df.to_dict()
+    df = df[:10]
+    print("Returning:",df)
+    df = df.transpose()
+
+    return {'data':df.to_dict(),
+            'file_paths':file_paths}
 
 
 
@@ -67,6 +86,8 @@ def jprint(obj):
     print(json.dumps(obj,indent=4))
 
 def get_user_info(user_obj):
+    #print(user_obj['name'].split(" ")[0].lower())
+    #print(gender_detector.get_gender(user_obj['name'].split(" ")[0].lower()))
     return {
         "user_id":user_obj['id'],
         "name": user_obj['name'],
@@ -75,7 +96,9 @@ def get_user_info(user_obj):
         "verified": user_obj['verified'],
         "followers_count": user_obj['followers_count'],
         "friends_count": user_obj['friends_count'],
+        "gender": gender_detector.get_gender(user_obj['name'].split(" ")[0].lower()),
     }
+
 
 
 
@@ -95,6 +118,9 @@ def handle_tweets(tweet):
     user_info['favorite_count'] =  tweet['favorite_count']
 
     user_info['type'] = 'regular'
+    global i
+    i = (i+1)%2
+    user_info['sentiment'] = i
 
     pairs = {}
     if "retweeted_status" in tweet:

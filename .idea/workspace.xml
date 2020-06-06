@@ -3,8 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="f35dfca5-6b06-4331-ac3b-2f83ca7fc56d" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/api.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/api.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api/search_for_tweets.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/search_for_tweets.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Firestore.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Firestore.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/LandingPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/LandingPage.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -66,7 +67,8 @@
       <workItem from="1591353043208" duration="292000" />
       <workItem from="1591354235583" duration="6029000" />
       <workItem from="1591370447215" duration="3955000" />
-      <workItem from="1591453964973" duration="6252000" />
+      <workItem from="1591453964973" duration="6356000" />
+      <workItem from="1591462398540" duration="7475000" />
     </task>
     <servers />
   </component>

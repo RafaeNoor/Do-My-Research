@@ -6,6 +6,7 @@
 .pnp.js
 venv
 work_dir
+static
 
 # testing
 /coverage
