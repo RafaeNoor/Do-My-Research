@@ -11,6 +11,7 @@ class TwitterAnalysisResults extends React.Component {
         this.state = {
             "table_data": props.table_data || {},
             "file_paths": props.file_paths || [],
+            "analysis_obj": props.analysis_obj || {},
         };
 
         console.log(props.file_paths);
@@ -81,6 +82,7 @@ class TwitterAnalysisResults extends React.Component {
                 <Container fluid>
                     {this.createTable(this.state.table_data)}
                     {this.createImages(this.state.file_paths)}
+                    {this.state.analysis_obj.desc}
 
                 </Container>
             </div>

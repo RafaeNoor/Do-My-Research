@@ -21,6 +21,10 @@ from keras.layers import Dense, LSTM, Dropout
 from keras.layers.embeddings import Embedding
 from tensorflow.keras.preprocessing.sequence import pad_sequences
 
+from tensorflow.keras import backend
+
+backend.clear_session()
+
 import nltk
 nltk.download('stopwords')
 
@@ -79,7 +83,7 @@ def search_for_phrase(phrase):
     CMD = 'search_tweets.py --max-results 200 --results-per-call 100 --filter-rule "'+phrase+'" --filename-prefix '+file_name+"_"+randomString()+' --print-stream --credential-file twitter_api_info.yaml'
     print(CMD)
     try:
-        sb.call(CMD,shell=True)
+        #sb.call(CMD,shell=True)
         print("Hello")
     except:
         print("Used Up Quota")
@@ -112,14 +116,17 @@ def search_for_phrase(phrase):
     df.to_csv(dir_path+"/testinggggg.csv")
     #process_individual(files,dir_path,phrase)
     #process.process_gender(df)
-    file_paths = process.do_complete_analysis(df,dir_path,phrase)
+    complete_analysis = process.do_complete_analysis(df,dir_path,phrase)
+    file_paths =  complete_analysis['file_paths']
+
 
     df = df[:10]
     print("Returning:",df)
     df = df.transpose()
 
     return {'data':df.to_dict(),
-            'file_paths':file_paths}
+            'file_paths':file_paths,
+            'analysis_obj': complete_analysis['analysis'],}
 
 
 
@@ -205,7 +212,7 @@ def produce_csv(obj,parent_dir,phrase):
     to_predict_numeric=pad_sequences(sequences_to_pred,maxlen=200,padding='post')
 
     graph = tf.compat.v1.get_default_graph()#get_default_graph()
-    print(to_predict_numeric[19])
+    #print(to_predict_numeric[19])
 
     #TODO: HACKish, add oov token instead
     for i in range(0,to_predict_numeric.shape[0]):
@@ -309,7 +316,7 @@ def process_individual(list_of_files,parent_dir,phrase):
         to_predict_numeric=pad_sequences(sequences_to_pred,maxlen=200,padding='post')
 
         graph = tf.compat.v1.get_default_graph()#get_default_graph()
-        print(to_predict_numeric[19])
+        #print(to_predict_numeric[19])
 
         #TODO: HACKish, add oov token instead
         for i in range(0,to_predict_numeric.shape[0]):

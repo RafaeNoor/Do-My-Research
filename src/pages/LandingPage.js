@@ -157,7 +157,7 @@ class LandingPage extends React.Component {
                                                 console.log(data.file_paths);
                                                 let component = (
                                                     <Container fluid>
-                                                        <TwitterAnalysisResults table_data={data.data} file_paths={data.file_paths} />
+                                                        <TwitterAnalysisResults table_data={data.data} file_paths={data.file_paths} analysis_obj={data.analysis_obj} />
                                                     </Container>
 
                                                 );
