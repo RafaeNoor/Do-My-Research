@@ -19,6 +19,7 @@ function union_arrays (x, y) {
 class Firestore {
     constructor(){
         this.database = firebase_obj.database;
+        this.storage = firebase_obj.storage;
     }
 
     async create_query_doc(query){
@@ -58,6 +59,8 @@ class Firestore {
         console.log("Updated field with value")
 
         console.log(orig_ref)
+        console.log('Printing files ref');
+        await this.get_phrase_csvs(query);
         return orig_ref;
     }
 
@@ -76,7 +79,52 @@ class Firestore {
         })
 
 
+
     }
+
+    async get_phrase_csvs(phrase){
+        let path_ref = this.storage.ref(`phrase_csv/${phrase}`);
+        //console.log(`PATH_REF: ${path_ref}`)
+
+        console.log(path_ref);
+
+        let links = await path_ref.listAll();
+
+        //console.log(links.items);
+        let promises = [];
+
+        links.items.forEach(itemRef => {
+            promises.push(itemRef.getDownloadURL());
+        });
+        let all_links = await Promise.all(promises);
+        console.log(all_links)
+        return all_links;
+
+        /*await path_ref.listAll().then(function(res) {
+            console.log("REFERECNES GOTTEN");
+            res.prefixes.forEach(function(folderRef) {
+                // All the prefixes under listRef.
+            });
+            res.items.forEach(function(itemRef) {
+                // All the items under listRef.
+                console.log(`ItemRef ${itemRef}`);
+                // Invoke function to download all files
+
+            });
+
+            return res.items;
+
+
+
+
+        }).catch(function(error) {
+            // Uh-oh, an error occurred!
+            console.log(`Error when trying to fetch from path phrase_csv/${phrase}`);
+            return [];
+        });*/
+    }
+
+
 }
 
 

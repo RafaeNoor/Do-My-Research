@@ -2,9 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f35dfca5-6b06-4331-ac3b-2f83ca7fc56d" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/api.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/api.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api/search_for_tweets.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/search_for_tweets.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/FirebaseConfig.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/FirebaseConfig.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Firestore.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Firestore.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/LandingPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/LandingPage.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -14,8 +21,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Python Script" />
         <option value="JavaScript File" />
+        <option value="Python Script" />
       </list>
     </option>
   </component>
@@ -68,7 +75,8 @@
       <workItem from="1591370447215" duration="3955000" />
       <workItem from="1591453964973" duration="6356000" />
       <workItem from="1591462398540" duration="7475000" />
-      <workItem from="1591701876715" duration="1937000" />
+      <workItem from="1591701876715" duration="4581000" />
+      <workItem from="1591719422813" duration="7156000" />
     </task>
     <servers />
   </component>
@@ -80,10 +88,10 @@
       <screen x="0" y="23" width="1440" height="827" />
     </state>
     <state x="141" y="23" width="1024" height="827" key="#Project_Structure/0.23.1440.827@0.23.1440.827" timestamp="1591310374259" />
-    <state x="880" y="245" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1591310542441">
+    <state x="837" y="245" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1591722508739">
       <screen x="0" y="23" width="1440" height="827" />
     </state>
-    <state x="880" y="245" key="#com.intellij.fileTypes.FileTypeChooser/0.23.1440.827@0.23.1440.827" timestamp="1591310542441" />
+    <state x="837" y="245" key="#com.intellij.fileTypes.FileTypeChooser/0.23.1440.827@0.23.1440.827" timestamp="1591722508739" />
     <state x="383" y="172" width="672" height="678" key="search.everywhere.popup" timestamp="1591459793391">
       <screen x="0" y="23" width="1440" height="827" />
     </state>

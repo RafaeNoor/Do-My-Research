@@ -9,6 +9,7 @@ import Col from "react-bootstrap/Col";
 import Table from "react-bootstrap/Table";
 import TwitterAnalysisResults from "../components/TwitterAnalysisResults";
 
+let firebase_obj = require('../components/Firestore');
 
 class LandingPage extends React.Component {
     constructor(props) {
@@ -112,6 +113,7 @@ class LandingPage extends React.Component {
 
                                 <Button onClick={() => {
                                     console.log(this.state.text);
+
                                     fetch(`/search/${this.state.text}`).then(res => res.json()).then(data => {
                                         console.log(JSON.stringify(data));
                                         let items = data.items
@@ -139,7 +141,29 @@ class LandingPage extends React.Component {
                                 <Button onClick={() => {
                                     console.log(this.state.text);
                                     console.log('Check');
-                                    fetch(`/tweet_search/${this.state.text}`).then(res => res.json()).then(data => {
+
+                                    console.log(`Attempting to get links... for [${this.state.text}]`)
+                                    firebase_obj.firestore.get_phrase_csvs(this.state.text).then(links => {
+                                        //console.log(`Links: ${JSON.stringify(links)}`);
+                                        let promises = [];
+                                        links.forEach(link => {
+                                            console.log(link)
+                                            promises.push(fetch(`get_storage_urls/${this.state.text}/${link}`));
+                                        });
+
+                                        Promise.all(promises).then(value => {
+                                            value.forEach(val => {
+                                                console.log(val);
+                                                console.log(val.msg);
+                                            });
+                                            console.log('All files downloaded!');
+                                        })
+                                        /*fetch(`/get_storage_urls/${args.join(',')}`).then(msg =>{
+                                            console.log(msg);
+                                        })*/
+                                    });
+
+                                    /*fetch(`/tweet_search/${this.state.text}`).then(res => res.json()).then(data => {
                                         //this.setState({'summary':this.createTable(data.data)});//JSON.stringify(data,null,4)});
                                         //console.log(data.file_paths)
                                         let component = (
@@ -149,7 +173,7 @@ class LandingPage extends React.Component {
 
                                         );
                                         this.setState({'summary':component});
-                                    });
+                                    });*/
                                 }
                                 }>Submit</Button>
                             </Col>

@@ -33,8 +33,8 @@ function App() {
         });
 
      */
-    let ref = firebase_obj.firestore.create_query_doc('feminism');
-    firebase_obj.firestore.add_query_pdf("","new.pdf","feminism");
+    //let ref = firebase_obj.firestore.create_query_doc('racism');
+    //firebase_obj.firestore.add_query_pdf("","new.pdf","racism");
 
 
 

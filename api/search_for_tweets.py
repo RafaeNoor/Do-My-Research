@@ -93,6 +93,7 @@ def search_for_phrase(phrase):
 
     #print(objects)
     df = produce_csv(objects,dir_path)
+    #process_individual(files,dir_path,phrase)
     #process.process_gender(df)
     file_paths = process.do_complete_analysis(df,dir_path,phrase)
 
@@ -259,3 +260,53 @@ def initialize_sentiment_classifier():
 
     return model_5, tokenizer
 
+
+
+def process_individual(list_of_files,parent_dir,phrase):
+    for file in list_of_files:
+        data = {}
+
+        obj = []
+
+        with open(file,"r") as readFile:
+            for line in readFile:
+                obj.append(json.loads(line))
+
+        for tweet in obj:
+            # Handle retweets
+            results = handle_tweets(tweet) # possible recursive tweets, returns pairs of updates
+
+            for k,v in results.items():
+                data[k] = v
+
+        #print(data)
+
+        df = pd.DataFrame.from_dict(data)
+        df = df.transpose()
+
+        sent_classifier, tk_obj = initialize_sentiment_classifier()
+
+        sentences = df[['full_text']]
+        to_predict = preprocessing(sentences,'full_text')
+        sequences_to_pred = tk_obj.texts_to_sequences(to_predict)
+        to_predict_numeric=pad_sequences(sequences_to_pred,maxlen=200,padding='post')
+
+        graph = tf.compat.v1.get_default_graph()#get_default_graph()
+        print(to_predict_numeric[19])
+
+        #TODO: HACKish, add oov token instead
+        for i in range(0,to_predict_numeric.shape[0]):
+            for j in range(0,to_predict_numeric.shape[1]):
+                if to_predict_numeric[i,j] >= 137252 :
+                    to_predict_numeric[i,j] = 0
+
+        with graph.as_default():
+            sentiments = sent_classifier.predict( to_predict_numeric ).tolist()
+            sentiments = [np.argmax(sent) for sent in sentiments]
+
+        df['sentiment'] = sentiments
+
+
+
+        #print(df)
+        df.to_csv(os.path.join(parent_dir,phrase+randomString(10)+'.csv'), index=False)
