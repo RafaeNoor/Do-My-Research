@@ -2,15 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f35dfca5-6b06-4331-ac3b-2f83ca7fc56d" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/api.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/api.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api/search_for_tweets.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/search_for_tweets.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/FirebaseConfig.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/FirebaseConfig.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Firestore.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Firestore.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/LandingPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/LandingPage.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -40,6 +34,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="TERMINAL_CUSTOM_COMMANDS_GOT_IT" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="add_unversioned_files" value="$PROJECT_DIR$/api/static/racism/testinggggg.csv" />
     <property name="android.sdk.path" value="$USER_HOME$/Library/Android/sdk" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
@@ -55,7 +50,7 @@
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.0" />
-    <property name="settings.editor.selected.configurable" value="settings.github" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -76,7 +71,9 @@
       <workItem from="1591453964973" duration="6356000" />
       <workItem from="1591462398540" duration="7475000" />
       <workItem from="1591701876715" duration="4581000" />
-      <workItem from="1591719422813" duration="7156000" />
+      <workItem from="1591719422813" duration="9498000" />
+      <workItem from="1591729206511" duration="3000" />
+      <workItem from="1591734320649" duration="68000" />
     </task>
     <servers />
   </component>
@@ -92,6 +89,10 @@
       <screen x="0" y="23" width="1440" height="827" />
     </state>
     <state x="837" y="245" key="#com.intellij.fileTypes.FileTypeChooser/0.23.1440.827@0.23.1440.827" timestamp="1591722508739" />
+    <state x="221" y="75" key="SettingsEditor" timestamp="1591734394876">
+      <screen x="0" y="23" width="1440" height="827" />
+    </state>
+    <state x="221" y="75" key="SettingsEditor/0.23.1440.827@0.23.1440.827" timestamp="1591734394876" />
     <state x="383" y="172" width="672" height="678" key="search.everywhere.popup" timestamp="1591459793391">
       <screen x="0" y="23" width="1440" height="827" />
     </state>

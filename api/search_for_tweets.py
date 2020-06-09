@@ -36,6 +36,9 @@ import tensorflow as tf
 
 
 from keras import backend
+
+import subprocess as sb
+
 backend.clear_session()
 
 gender_detector = gender.Detector(case_sensitive=False)
@@ -76,7 +79,7 @@ def search_for_phrase(phrase):
     CMD = 'search_tweets.py --max-results 200 --results-per-call 100 --filter-rule "'+phrase+'" --filename-prefix '+file_name+"_"+randomString()+' --print-stream --credential-file twitter_api_info.yaml'
     print(CMD)
     try:
-        #sb.call(CMD,shell=True)
+        sb.call(CMD,shell=True)
         print("Hello")
     except:
         print("Used Up Quota")
@@ -92,7 +95,21 @@ def search_for_phrase(phrase):
 
 
     #print(objects)
-    df = produce_csv(objects,dir_path)
+    df = produce_csv(objects,dir_path,phrase)
+
+    downloaded_csvs = glob.glob(dir_path+"/csvs/"+"*.csv")
+
+    for csv in downloaded_csvs:
+        print("Merging:\t",csv)
+        new_df = pd.read_csv(csv)
+        df = pd.concat([df, new_df])
+
+    print("Combined analysis has {} records".format(len(df)))
+
+    df = df.drop(['Unnamed: 0'],axis=1)
+
+    print(dir_path+"/testinggggg.csv")
+    df.to_csv(dir_path+"/testinggggg.csv")
     #process_individual(files,dir_path,phrase)
     #process.process_gender(df)
     file_paths = process.do_complete_analysis(df,dir_path,phrase)
@@ -165,7 +182,7 @@ def handle_tweets(tweet):
 
 
 
-def produce_csv(obj,parent_dir):
+def produce_csv(obj,parent_dir,phrase):
     data = {}
 
     for tweet in obj:
@@ -205,7 +222,7 @@ def produce_csv(obj,parent_dir):
 
 
     print(df)
-    df.to_csv(os.path.join(parent_dir,'data_combine.csv'), index=False)
+    df.to_csv(os.path.join(parent_dir,phrase+"_"+randomString(10)+'.csv'), index=False)
     return df
 
 def remove_punctuation(data):

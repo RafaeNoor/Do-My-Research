@@ -152,15 +152,21 @@ class LandingPage extends React.Component {
                                         });
 
                                         Promise.all(promises).then(value => {
-                                            value.forEach(val => {
-                                                console.log(val);
-                                                console.log(val.msg);
-                                            });
                                             console.log('All files downloaded!');
+                                            fetch(`/tweet_search/${this.state.text}`).then(res => res.json()).then(data => {
+                                                console.log(data.file_paths);
+                                                let component = (
+                                                    <Container fluid>
+                                                        <TwitterAnalysisResults table_data={data.data} file_paths={data.file_paths} />
+                                                    </Container>
+
+                                                );
+
+                                                this.setState({'summary':component});
+                                            });
+
                                         })
-                                        /*fetch(`/get_storage_urls/${args.join(',')}`).then(msg =>{
-                                            console.log(msg);
-                                        })*/
+
                                     });
 
                                     /*fetch(`/tweet_search/${this.state.text}`).then(res => res.json()).then(data => {
