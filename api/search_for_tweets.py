@@ -1,4 +1,3 @@
-import subprocess as sb
 import os,sys
 import json
 import pandas as pd
@@ -11,6 +10,33 @@ import time
 import gender_guesser.detector as gender
 
 import process_tweet_data as process
+from nltk.stem.wordnet import WordNetLemmatizer
+import pickle
+
+import numpy as np
+import pandas as pd
+from keras.models import Sequential
+from keras.layers import Dense, LSTM, Dropout
+
+from keras.layers.embeddings import Embedding
+from tensorflow.keras.preprocessing.sequence import pad_sequences
+
+import nltk
+nltk.download('stopwords')
+
+from nltk.tokenize import word_tokenize
+from nltk.corpus import stopwords
+
+import string
+
+from keras.preprocessing.text import text_to_word_sequence
+from keras.preprocessing.text import Tokenizer
+
+import tensorflow as tf
+
+
+from keras import backend
+backend.clear_session()
 
 gender_detector = gender.Detector(case_sensitive=False)
 
@@ -118,9 +144,8 @@ def handle_tweets(tweet):
     user_info['favorite_count'] =  tweet['favorite_count']
 
     user_info['type'] = 'regular'
-    global i
-    i = (i+1)%2
-    user_info['sentiment'] = i
+    #i = (i+1)%2
+    #user_info['sentiment'] = i
 
     pairs = {}
     if "retweeted_status" in tweet:
@@ -153,10 +178,84 @@ def produce_csv(obj,parent_dir):
 
     df = pd.DataFrame.from_dict(data)
     df = df.transpose()
+
+    sent_classifier, tk_obj = initialize_sentiment_classifier()
+
+    sentences = df[['full_text']]
+    to_predict = preprocessing(sentences,'full_text')
+    sequences_to_pred = tk_obj.texts_to_sequences(to_predict)
+    to_predict_numeric=pad_sequences(sequences_to_pred,maxlen=200,padding='post')
+
+    graph = tf.compat.v1.get_default_graph()#get_default_graph()
+    print(to_predict_numeric[19])
+
+    #TODO: HACKish, add oov token instead
+    for i in range(0,to_predict_numeric.shape[0]):
+        for j in range(0,to_predict_numeric.shape[1]):
+            if to_predict_numeric[i,j] >= 137252 :
+                to_predict_numeric[i,j] = 0
+
+    with graph.as_default():
+        sentiments = sent_classifier.predict( to_predict_numeric ).tolist()
+        sentiments = [np.argmax(sent) for sent in sentiments]
+
+    df['sentiment'] = sentiments
+
+
+
     print(df)
     df.to_csv(os.path.join(parent_dir,'data_combine.csv'), index=False)
     return df
 
+def remove_punctuation(data):
+    for punctuation in string.punctuation:
+        if punctuation != '@':
+            data = data.replace(punctuation, '')
+    return data
+
+def remove_trailing(data):
+    data = data.replace('@',' ')
+    return data
 
 
+
+def preprocessing(data,col):
+    data[col] = data[col].replace(to_replace=r'<br />',value="",regex=True)
+    data[col] = data[col].replace(to_replace=r'http://t\.co/[A-Za-z0-9]{8}',value=" ",regex=True)
+    data[col] = data[col].replace(to_replace=r'https://t\.co/[A-Za-z0-9]{8}',value=" ",regex=True)
+    data[col] = data[col].str.lower()
+    data[col] = data[col].apply(remove_punctuation)
+    data[col] = data[col].replace(to_replace = r'@[A-Za-z0-9]*',value = 'AT_TOKEN',regex=True)
+    data[col] = data[col].apply(remove_trailing)
+    print("Removing stop words...")
+    stop = stopwords.words('english')
+    lem = WordNetLemmatizer()
+
+    data[col] = data[col].apply(lambda x: " ".join([lem.lemmatize(word,'v') for word in word_tokenize(x)]))
+
+    return data[col]
+
+
+def initialize_sentiment_classifier():
+    input_dim=137252
+    EMBEDDING_DIM=200
+    max_seq_length=200
+
+    model_5 = Sequential()
+    model_5.add(Embedding(input_dim, EMBEDDING_DIM, input_length=max_seq_length))
+    model_5.add(LSTM(200))
+    model_5.add(Dropout(0.2))
+    model_5.add(Dense(4))
+    model_5.add(Dropout(0.2))
+    model_5.add(Dense(2, activation='softmax',name='sentiment_classifier'))
+    model_5.compile(loss=["binary_crossentropy"], optimizer='adam', metrics=['accuracy'])
+    print("Summary",model_5.summary())
+
+    # Load weights
+    model_5.load_weights('modellstm.hdf5')
+
+    with open('tokenizer.pickle', 'rb') as handle:
+        tokenizer = pickle.load(handle)
+
+    return model_5, tokenizer
 

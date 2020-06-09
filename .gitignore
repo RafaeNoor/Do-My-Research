@@ -8,6 +8,10 @@ venv
 work_dir
 static
 
+# Sentiment Classifer files
+tokenizer.pickle
+modellstm.hdf5
+
 # testing
 /coverage
 
