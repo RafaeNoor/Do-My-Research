@@ -16,7 +16,6 @@ class Header extends React.Component {
     render() {
         return (
             <div>
-                <Container fluid>
                     <Navbar collapseOnSelect sticky={"top"} expand="lg" bg="dark" variant="dark">
                         <LinkContainer to={"/"}>
                             <Navbar.Brand >Do-My-Research!</Navbar.Brand>
@@ -39,7 +38,6 @@ class Header extends React.Component {
 
                         </Navbar.Collapse>
                     </Navbar>
-                </Container>
             </div>
         );
     }
@@ -48,9 +46,3 @@ class Header extends React.Component {
 export default Header;
 
 
-/*
-<Form inline>
-    <FormControl type="text" placeholder="Search" className="mr-sm-2" />
-    <Button variant="outline-info">Search</Button>
-</Form>
-*/

@@ -3,8 +3,15 @@
   <component name="ChangeListManager">
     <list default="true" id="f35dfca5-6b06-4331-ac3b-2f83ca7fc56d" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/api.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/api.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/google_search_term.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/google_search_term.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api/process_tweet_data.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/process_tweet_data.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api/search_for_tweets.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/search_for_tweets.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/summarize.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/summarize.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Header.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Header.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/TwitterAnalysisResults.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/TwitterAnalysisResults.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/LandingPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/LandingPage.js" afterDir="false" />
     </list>
@@ -16,8 +23,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="JavaScript File" />
         <option value="Python Script" />
+        <option value="JavaScript File" />
       </list>
     </option>
   </component>
@@ -74,7 +81,9 @@
       <workItem from="1591701876715" duration="4581000" />
       <workItem from="1591719422813" duration="9498000" />
       <workItem from="1591729206511" duration="3000" />
-      <workItem from="1591734320649" duration="3417000" />
+      <workItem from="1591734320649" duration="3526000" />
+      <workItem from="1591799572304" duration="1292000" />
+      <workItem from="1591820794315" duration="8651000" />
     </task>
     <servers />
   </component>

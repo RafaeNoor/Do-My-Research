@@ -3,19 +3,19 @@ import Container from "react-bootstrap/Container";
 import Table from "react-bootstrap/Table";
 import Image from "react-bootstrap/Image";
 import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
 
 //import 'bootstrap/dist/css/bootstrap.min.css';
-class TwitterAnalysisResults extends React.Component {
+class GoogleTrendsAnalysisResults extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            "table_data": props.table_data || {},
             "file_paths": props.file_paths || [],
             "analysis_obj": props.analysis_obj || {},
+            "phrase": props.phrase || "NO_PHRASE_SPECIFIED",
         };
 
-        console.log(props.file_paths);
+        console.log('CREATED TREND RESULT')
+
     }
 
 
@@ -65,44 +65,57 @@ class TwitterAnalysisResults extends React.Component {
 
     createImages(filepaths){
 
-
-
         let components = []
-
-        let location_component = (
-            <Row className={"justify-content-md-center"}>
-                <Col md={'auto'}>
-                    <Image src={filepaths[0]}></Image>
-                </Col>
-                <Col md ={'auto'}>
-                    <Image src={filepaths[1]}></Image>
-                </Col>
-
-            </Row>
-        );
-
-        let sentiment_component = (
-            <Row className={"justify-content-md-center"}>
-                <Col md={'auto'}>
-                    <Image src={filepaths[2]}></Image>
-                </Col>
-                <Col md ={'auto'}>
-                    <Image src={filepaths[3]}></Image>
-                </Col>
-
-            </Row>
-        );
-
-        components = [location_component,sentiment_component];
-
-        /*filepaths.forEach(fp => {
+        filepaths.forEach(fp => {
             components.push(
-            <Row className={"justify-content-md-center"}>
-                <Image src={fp}></Image>
+                <Row className={"justify-content-md-center"}>
+                    <Image src={fp}></Image>
+                </Row>
+            );
+        });
+        return components;
+    }
+
+    createEntry(type){
+
+        let top_entries = [];
+
+        let title = "";
+        let key = "";
+
+        if(type == "top"){
+            title = `Top Trending Related Terms for ${this.state.phrase} across all time`
+            key = "top"
+        } else {
+            title = `Top Trending Related Terms for ${this.state.phrase} as of ${new Date().toDateString()}`;
+            key = 'rising';
+        }
+        //console.log("ANALYSIS OBJ")
+        //console.log(this.state.analysis_obj)
+
+        this.state.analysis_obj[key].forEach(search_obj => {
+            let search_term = Object.keys(search_obj)[0];
+            console.log(search_obj)
+            console.log(search_term)
+
+
+            top_entries.push(
+            <Row>
+                <h3>{search_term}</h3><br/>
+                {search_obj[search_term]}
             </Row>
             );
-        });*/
-        return components;
+        })
+
+        let result = (
+        <Container fluid>
+            <h2>{title}</h2>
+            {top_entries}
+        </Container>
+        );
+
+        return result;
+
     }
 
 
@@ -110,16 +123,14 @@ class TwitterAnalysisResults extends React.Component {
         return (
             <div>
                 <Container fluid>
-                    <h1>Twitter Analysis Result!</h1>
+                    <h1>Google Trend Analysis!</h1>
+                    {this.createEntry('top')}
                     <br/>
-                    {this.createTable(this.state.table_data)}
-                    {this.createImages(this.state.file_paths)}
-                    {this.state.analysis_obj.desc}
-
+                    {this.createEntry('rising')}
                 </Container>
             </div>
         );
     }
 }
 
-export default TwitterAnalysisResults;
+export default GoogleTrendsAnalysisResults;

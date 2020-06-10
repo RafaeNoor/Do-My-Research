@@ -8,8 +8,10 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Table from "react-bootstrap/Table";
 import TwitterAnalysisResults from "../components/TwitterAnalysisResults";
+import GoogleTrendsAnalysisResults from "../components/GoogleTrendsAnalysisResults";
 
 let firebase_obj = require('../components/Firestore');
+let trend_obj = require('../components/GoogleTrends').trend_obj;
 
 class LandingPage extends React.Component {
     constructor(props) {
@@ -71,6 +73,36 @@ class LandingPage extends React.Component {
             </Table>
 
         );
+    }
+
+    async get_google_trend_results(phrase){
+        let res = await trend_obj.get_related_terms(phrase);
+        return (<GoogleTrendsAnalysisResults
+            analysis_obj={res} phrase={phrase} />);
+    }
+
+    async get_twitter_analysis_results(phrase){
+        let links = await firebase_obj.firestore.get_phrase_csvs(phrase);
+        //console.log(`Links: ${JSON.stringify(links)}`);
+        let promises = [];
+        links.forEach(link => {
+            console.log(link)
+            promises.push(fetch(`get_storage_urls/${phrase}/${link}`));
+        });
+
+        let value = await Promise.all(promises)
+        console.log('All files downloaded!');
+        let data = await fetch(`/tweet_search/${phrase}`).then(res => res.json());
+        console.log(data.file_paths);
+        let component = (
+            <Container fluid>
+                <TwitterAnalysisResults table_data={data.data} file_paths={data.file_paths} analysis_obj={data.analysis_obj} />
+            </Container>
+
+        );
+
+        return component;
+
     }
 
 
@@ -140,9 +172,28 @@ class LandingPage extends React.Component {
 
                                 <Button onClick={() => {
                                     console.log(this.state.text);
-                                    console.log('Check');
+                                    console.log('Checking related terms...');
 
-                                    console.log(`Attempting to get links... for [${this.state.text}]`)
+                                    let get_all_results = [];
+
+                                    get_all_results.push(this.get_twitter_analysis_results(this.state.text));
+                                    get_all_results.push(this.get_google_trend_results(this.state.text));
+
+                                    Promise.all(get_all_results).then(all_results => {
+                                        this.setState({'summary':all_results});
+                                    });
+
+                                    /*trend_obj.get_related_terms(this.state.text).then(trend_res => {
+                                        console.log(trend_res);
+                                        this.setState({'summary': <GoogleTrendsAnalysisResults
+                                                analysis_obj={trend_res} phrase={this.state.text}  />});
+                                    })*/
+
+
+
+
+                                    //console.log(`Attempting to get links... for [${this.state.text}]`)
+                                    /*
                                     firebase_obj.firestore.get_phrase_csvs(this.state.text).then(links => {
                                         //console.log(`Links: ${JSON.stringify(links)}`);
                                         let promises = [];
@@ -167,19 +218,9 @@ class LandingPage extends React.Component {
 
                                         })
 
-                                    });
-
-                                    /*fetch(`/tweet_search/${this.state.text}`).then(res => res.json()).then(data => {
-                                        //this.setState({'summary':this.createTable(data.data)});//JSON.stringify(data,null,4)});
-                                        //console.log(data.file_paths)
-                                        let component = (
-                                            <Container fluid>
-                                                <TwitterAnalysisResults table_data={data.data} file_paths={data.file_paths} />
-                                            </Container>
-
-                                        );
-                                        this.setState({'summary':component});
                                     });*/
+
+
                                 }
                                 }>Submit</Button>
                             </Col>

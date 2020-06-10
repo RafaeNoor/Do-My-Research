@@ -10,6 +10,7 @@
     "bootstrap": "^4.5.0",
     "firebase": "^7.15.0",
     "firebase-admin": "^8.12.1",
+    "google-trends-api": "^4.9.0",
     "http2": "^3.3.7",
     "react": "^16.13.1",
     "react-bootstrap": "^1.0.1",

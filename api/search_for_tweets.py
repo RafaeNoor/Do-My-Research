@@ -121,6 +121,7 @@ def search_for_phrase(phrase):
 
 
     df = df[:10]
+    df = df[['screen_name','full_text','gender']]
     print("Returning:",df)
     df = df.transpose()
 

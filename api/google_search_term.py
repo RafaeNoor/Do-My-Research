@@ -11,4 +11,8 @@ google_search_file = Blueprint('google_search_file',__name__)
 def google_search(search_term, **kwargs):
     service = build("customsearch", "v1", developerKey=SEARCH_API)
     res = service.cse().list(q=search_term, cx=CSE_ID, **kwargs).execute()
-    return res
+    items = res['items']
+    print(items[0].keys())
+    #print(items[0])
+    urls = [item['link'] for item in items]
+    return urls

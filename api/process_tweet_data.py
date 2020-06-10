@@ -95,11 +95,18 @@ def analyze_geography(gender_obj, n,phrase):
 
     analysis_obj = {"desc":"","gendered":0}
 
+    phrase = "'"+phrase.capitalize()+"'"
+
     if percentage_common >= 1.0:
         print("All countries in common")
         analysis_obj['desc'] = "Upon processing the data and analyzing how the top {} geography varies  " \
                                "with frequency of discussion on {} within Twitter users, there seems " \
                                "to be no indication that {} is a gendered issue. ".format(n,phrase,phrase)
+        analysis_obj['gendered'] = 0
+    elif percentage_common >= 0.70:
+        analysis_obj['desc'] = "A majority of the top {} geographies are common across Male  " \
+                               "and Female Twitter users when discussing {}. As most of the geographies overlap,  " \
+                               "we are lead to believe that {} is not gendered".format(n,phrase, phrase)
         analysis_obj['gendered'] = 0
     elif percentage_common >= 0.5:
         analysis_obj['desc'] = "Approximately half of the top {} geographies are common across across Male  " \

@@ -17,7 +17,7 @@ from flask import Blueprint, render_template, session,abort
 summarize_file = Blueprint('summarize_file',__name__)
 
 @summarize_file.route('/summary/<path:url>')
-def summarize(url):
+def summarize(url,sent_len = SENTENCES_COUNT):
     #url = "https://en.wikipedia.org/wiki/Automatic_summarization"
     parser = HtmlParser.from_url(url, Tokenizer(LANGUAGE))
     # or for plain text files
@@ -28,5 +28,5 @@ def summarize(url):
     summarizer.stop_words = get_stop_words(LANGUAGE)
 
 
-    return {'summary':[str(sentence) for sentence in summarizer(parser.document, SENTENCES_COUNT)]}
+    return {'summary':[str(sentence) for sentence in summarizer(parser.document, sent_len)]}
 

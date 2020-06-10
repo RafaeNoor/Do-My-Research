@@ -39,10 +39,10 @@ function App() {
 
 
     return (
-        <div className="App">
-            <Router>
+        <Router>
+            <Header/>
+            <div className="App">
                 <Container fluid>
-                    <Header/>
                     <Switch>
                         <Route path={"/about"}>
                             <AboutPage/>
@@ -52,9 +52,10 @@ function App() {
                         </Route>
                     </Switch>
                 </Container>
-            </Router>
+            </div>
+        </Router>
 
-        </div>
+
     );
 }
 
