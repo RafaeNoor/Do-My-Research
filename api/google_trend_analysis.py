@@ -3,7 +3,7 @@ google_trend_analysis_file = Blueprint('google_trend_analysis_file',__name__)
 
 from pytrends.request import TrendReq
 
-from google_search_term import google_search
+from google_search_term import google_search, google_search_images
 from summarize import summarize
 
 
@@ -15,7 +15,7 @@ import json
 
 # Get top 3 UNIQUE related terms from top and rising
 TOP_N = 2
-SUMMARY_LENGTH = 8
+SUMMARY_LENGTH = 7
 
 @google_trend_analysis_file.route('/testing/<string:phrase>')
 def get_related_terms(phrase):
@@ -45,21 +45,28 @@ def clean_related_queries(arg,phrase):
 
 def search_and_summarize_term(phrase,related_term):
     list_of_urls = google_search(phrase+" "+related_term)
+    list_of_images = google_search_images(phrase+" "+related_term)
     print(list_of_urls)
 
     #TODO: Add link vetting process
 
     url = list_of_urls[0]
+    img_url = list_of_images[0]
 
     if related_term == "definition":
         summary = summarize(url,2)['summary']
     else:
         summary = summarize(url,SUMMARY_LENGTH)['summary']
 
-    summary += ["["+str(url)+"]"]
+    #summary += [' <a href="'+str(url)+'">Citation</a> ',' <img src="'+str(img_url)+'"></img> ']
 
 
-    return {related_term.capitalize(): summary}
+    return {related_term.capitalize(): {
+        "summary": summary,
+        "citation": url,
+        "img": img_url,
+    }
+    }
 
 
 

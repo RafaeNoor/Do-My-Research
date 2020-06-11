@@ -10,9 +10,22 @@ google_search_file = Blueprint('google_search_file',__name__)
 @google_search_file.route('/search/<string:search_term>')
 def google_search(search_term, **kwargs):
     service = build("customsearch", "v1", developerKey=SEARCH_API)
-    res = service.cse().list(q=search_term, cx=CSE_ID, **kwargs).execute()
+    res = service.cse().list(q=search_term, cx=CSE_ID,num=3, **kwargs).execute()
     items = res['items']
-    print(items[0].keys())
+    #print(items[0].keys())
     #print(items[0])
     urls = [item['link'] for item in items]
     return urls
+
+
+def google_search_images(search_term):
+    service = build("customsearch", "v1", developerKey=SEARCH_API)
+    res = service.cse().list(q=search_term, cx=CSE_ID, num=3 ,searchType='image',fileType='png').execute()
+    items = res['items']
+
+
+    urls = [item['link'] for item in items]
+    print('image urls:\t',urls)
+    return urls
+
+

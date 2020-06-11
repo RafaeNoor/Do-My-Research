@@ -3,6 +3,8 @@ import Container from "react-bootstrap/Container";
 import Table from "react-bootstrap/Table";
 import Image from "react-bootstrap/Image";
 import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+import Figure from "react-bootstrap/Figure";
 
 //import 'bootstrap/dist/css/bootstrap.min.css';
 class GoogleTrendsAnalysisResults extends React.Component {
@@ -102,7 +104,20 @@ class GoogleTrendsAnalysisResults extends React.Component {
             top_entries.push(
             <Row>
                 <h3>{search_term}</h3><br/>
-                {search_obj[search_term]}
+                <Col md={'auto'}>
+                {search_obj[search_term]['summary']}
+                <a href={search_obj[search_term]['citation']}>{search_term + " citation"}</a>
+                </Col>
+                <Col md={'auto'}>
+                    <Figure>
+                        <Figure.Image
+                            width={200}
+                            height={200}
+                            src={search_obj[search_term]['img']}
+                            alt={`Image describing ${search_term}`}
+                            />
+                    </Figure>
+                </Col>
             </Row>
             );
         })

@@ -176,7 +176,7 @@ class LandingPage extends React.Component {
 
                                     let get_all_results = [];
 
-                                    get_all_results.push(this.get_twitter_analysis_results(this.state.text));
+                                    //get_all_results.push(this.get_twitter_analysis_results(this.state.text));
                                     get_all_results.push(this.get_google_trend_results(this.state.text));
 
                                     Promise.all(get_all_results).then(all_results => {
