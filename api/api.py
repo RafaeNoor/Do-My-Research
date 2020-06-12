@@ -1,5 +1,5 @@
 
-from flask import Flask
+from flask import Flask, request
 import time
 
 from summarize import summarize_file
@@ -9,6 +9,7 @@ from firebase_storage import firebase_storage_file
 from google_trend_analysis import google_trend_analysis_file
 
 import os
+import pdfkit
 
 
 app = Flask(__name__)
@@ -23,3 +24,12 @@ def get_current_time():
     print(os.getenv('PUBLIC_URL'))
     return {'time':time.time()}
 
+@app.route('/read_html/<html>')
+def read_html(html):
+    print(request.path)
+    print("READ HTML invoked")
+    print(html)
+    #pdfkit.from_file('../public/index.html','static/out.pdf')
+
+
+    return {"msg":"completed"}

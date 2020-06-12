@@ -5,6 +5,7 @@ import Image from "react-bootstrap/Image";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Figure from "react-bootstrap/Figure";
+import Card from "react-bootstrap/Card";
 
 //import 'bootstrap/dist/css/bootstrap.min.css';
 class GoogleTrendsAnalysisResults extends React.Component {
@@ -95,29 +96,47 @@ class GoogleTrendsAnalysisResults extends React.Component {
         //console.log("ANALYSIS OBJ")
         //console.log(this.state.analysis_obj)
 
+        let counter = 0;
         this.state.analysis_obj[key].forEach(search_obj => {
             let search_term = Object.keys(search_obj)[0];
             console.log(search_obj)
             console.log(search_term)
 
+            let left= "";
+            let right = "";
 
+            let card = (<Col>
+                <Card>
+                    <Card.Body>{search_obj[search_term]['summary']}
+                        <a href={search_obj[search_term]['citation']}>{search_term + " citation"}</a> </Card.Body>
+                </Card>
+
+            </Col>);
+            let figure = (<Col>
+                <Figure>
+                    <Figure.Image
+                        width={600}
+                        height={600}
+                        src={search_obj[search_term]['img']}
+                        alt={`Image describing ${search_term}`}
+                    />
+                </Figure>
+            </Col>);
+            if(counter % 2 == 0){
+                left = figure;
+                right = card;
+            } else {
+                left = card;
+                right = figure;
+
+            }
+
+            //<h3>{search_term}</h3><br/>
             top_entries.push(
             <Row>
                 <h3>{search_term}</h3><br/>
-                <Col md={'auto'}>
-                {search_obj[search_term]['summary']}
-                <a href={search_obj[search_term]['citation']}>{search_term + " citation"}</a>
-                </Col>
-                <Col md={'auto'}>
-                    <Figure>
-                        <Figure.Image
-                            width={200}
-                            height={200}
-                            src={search_obj[search_term]['img']}
-                            alt={`Image describing ${search_term}`}
-                            />
-                    </Figure>
-                </Col>
+                {left}
+                {right}
             </Row>
             );
         })

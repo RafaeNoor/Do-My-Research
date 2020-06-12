@@ -3,8 +3,10 @@
   <component name="ChangeListManager">
     <list default="true" id="f35dfca5-6b06-4331-ac3b-2f83ca7fc56d" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/google_search_term.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/google_search_term.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/google_trend_analysis.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/google_trend_analysis.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/api.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/api.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/GoogleTrendsAnalysisResults.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/GoogleTrendsAnalysisResults.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/LandingPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/LandingPage.js" afterDir="false" />
     </list>
@@ -77,7 +79,9 @@
       <workItem from="1591734320649" duration="3526000" />
       <workItem from="1591799572304" duration="1292000" />
       <workItem from="1591820794315" duration="9060000" />
-      <workItem from="1591878125454" duration="2589000" />
+      <workItem from="1591878125454" duration="2661000" />
+      <workItem from="1591883587377" duration="3764000" />
+      <workItem from="1591955302896" duration="7937000" />
     </task>
     <servers />
   </component>

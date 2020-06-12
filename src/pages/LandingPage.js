@@ -1,7 +1,6 @@
 import React from "react";
 import {LinkContainer } from 'react-router-bootstrap';
 import Container from "react-bootstrap/Container";
-import Header from "../components/Header";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import Row from "react-bootstrap/Row";
@@ -12,6 +11,13 @@ import GoogleTrendsAnalysisResults from "../components/GoogleTrendsAnalysisResul
 
 let firebase_obj = require('../components/Firestore');
 let trend_obj = require('../components/GoogleTrends').trend_obj;
+
+
+//let pdf = require('html-pdf');
+let html2canvas = require('html2canvas')
+let jsPdf = require('jspdf');
+
+window.html2canvas = html2canvas
 
 class LandingPage extends React.Component {
     constructor(props) {
@@ -120,51 +126,6 @@ class LandingPage extends React.Component {
                     <Form.Group>
                         <Row className="justify-content-md-center">
                             <Col>
-                                <Form.Control size="lg" type="text" placeholder="Enter URL to summarize" onChange={
-                                    e=>this.state.text = (e.target.value)} />
-                            </Col>
-                            <Col md={"auto"}>
-
-                                <Button onClick={() => {
-                                    console.log(this.state.text);
-                                    fetch(`/summary/${this.state.text}`).then(res => res.json()).then(data => {
-                                        console.log(data)
-                                        this.setState({'summary':data.summary});
-                                    });
-                                }
-                                }>Submit</Button>
-                            </Col>
-                        </Row>
-                        <br/>
-                        <Row className="justify-content-md-center">
-                            <Col>
-                                <Form.Control size="lg" type="text" placeholder="Enter PHRASE to Google" onChange={
-                                    e=>this.state.text = (e.target.value)} />
-                            </Col>
-                            <Col md={"auto"}>
-
-                                <Button onClick={() => {
-                                    console.log(this.state.text);
-
-                                    fetch(`/search/${this.state.text}`).then(res => res.json()).then(data => {
-                                        console.log(JSON.stringify(data));
-                                        let items = data.items
-                                        let urls = []
-                                        items.forEach(item => {
-                                            urls.push(item.formattedUrl);
-                                        })
-
-                                        console.log(urls)
-
-                                        this.setState({'summary':JSON.stringify(urls,null,4)});
-                                    });
-                                }
-                                }>Submit</Button>
-                            </Col>
-                        </Row>
-                        <br/>
-                        <Row className="justify-content-md-center">
-                            <Col>
                                 <Form.Control size="lg" type="text" placeholder="Enter phrase to process tweet" onChange={
                                     e=>this.state.text = (e.target.value)} />
                             </Col>
@@ -183,43 +144,6 @@ class LandingPage extends React.Component {
                                         this.setState({'summary':all_results});
                                     });
 
-                                    /*trend_obj.get_related_terms(this.state.text).then(trend_res => {
-                                        console.log(trend_res);
-                                        this.setState({'summary': <GoogleTrendsAnalysisResults
-                                                analysis_obj={trend_res} phrase={this.state.text}  />});
-                                    })*/
-
-
-
-
-                                    //console.log(`Attempting to get links... for [${this.state.text}]`)
-                                    /*
-                                    firebase_obj.firestore.get_phrase_csvs(this.state.text).then(links => {
-                                        //console.log(`Links: ${JSON.stringify(links)}`);
-                                        let promises = [];
-                                        links.forEach(link => {
-                                            console.log(link)
-                                            promises.push(fetch(`get_storage_urls/${this.state.text}/${link}`));
-                                        });
-
-                                        Promise.all(promises).then(value => {
-                                            console.log('All files downloaded!');
-                                            fetch(`/tweet_search/${this.state.text}`).then(res => res.json()).then(data => {
-                                                console.log(data.file_paths);
-                                                let component = (
-                                                    <Container fluid>
-                                                        <TwitterAnalysisResults table_data={data.data} file_paths={data.file_paths} analysis_obj={data.analysis_obj} />
-                                                    </Container>
-
-                                                );
-
-                                                this.setState({'summary':component});
-                                            });
-
-                                        })
-
-                                    });*/
-
 
                                 }
                                 }>Submit</Button>
@@ -227,6 +151,28 @@ class LandingPage extends React.Component {
                         </Row>
 
                     </Form.Group>
+                    <Button onClick={evt => {
+                        //let html = document.getElementsByTagName('html')[0]
+                        console.log('printing html')
+                        //console.log(JSON.stringify(document));
+                        let html_str = new XMLSerializer().serializeToString(document);
+                        //let html = fs.readFileSync('index.html','utf8');
+                        /*fetch(`/read_html/${html_str}`).then(res => res.json()).then(data => {
+                            console.log('new file created');
+                        });*/
+                        //////////////////window.print();
+                        //save_pdf();
+                        //pdf.create(html_str).toFile('out.pdf',()=>{});
+                        alert('Yet to implement properly, why not use your browsers in the meal while!')
+                        window.print();
+
+
+
+
+
+
+
+                    }}>Save PDF</Button>
                     {this.state.summary}
 
                 </Container>
@@ -235,4 +181,47 @@ class LandingPage extends React.Component {
     }
 }
 
+
+function downloadBlob(blob, filename) {
+    // Create an object URL for the blob object
+    const url = URL.createObjectURL(blob);
+
+    // Create a new anchor element
+    const a = document.createElement('a');
+
+    // Set the href and download attributes for the anchor element
+    // You can optionally set other attributes like `title`, etc
+    // Especially, if the anchor element will be attached to the DOM
+    a.href = url;
+    a.download = filename || 'download';
+
+    // Click handler that releases the object URL after the element has been clicked
+    // This is required for one-off downloads of the blob content
+    const clickHandler = () => {
+        setTimeout(() => {
+            URL.revokeObjectURL(url);
+            //this.removeEventListener('click', clickHandler);
+        }, 150);
+    };
+
+    // Add the click event listener on the anchor element
+    // Comment out this line if you don't want a one-off download of the blob content
+    a.addEventListener('click', clickHandler, false);
+
+    // Programmatically trigger a click on the anchor element
+    // Useful if you want the download to happen automatically
+    // Without attaching the anchor element to the DOM
+    // Comment out this line if you don't want an automatic download of the blob content
+    a.click();
+
+    // Return the anchor element
+    // Useful if you want a reference to the element
+    // in order to attach it to the DOM or use it in some other way
+    return a;
+}
+
 export default LandingPage;
+
+
+
+
