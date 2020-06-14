@@ -3,11 +3,16 @@
   <component name="ChangeListManager">
     <list default="true" id="f35dfca5-6b06-4331-ac3b-2f83ca7fc56d" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/api.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/api.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/google_search_term.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/google_search_term.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/google_trend_analysis.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/google_trend_analysis.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/process_tweet_data.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/process_tweet_data.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/search_for_tweets.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/search_for_tweets.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/pattern.png" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/GoogleTrendsAnalysisResults.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/GoogleTrendsAnalysisResults.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Header.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Header.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/TwitterAnalysisResults.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/TwitterAnalysisResults.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/LandingPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/LandingPage.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -81,7 +86,14 @@
       <workItem from="1591820794315" duration="9060000" />
       <workItem from="1591878125454" duration="2661000" />
       <workItem from="1591883587377" duration="3764000" />
-      <workItem from="1591955302896" duration="7937000" />
+      <workItem from="1591955302896" duration="8245000" />
+      <workItem from="1591971777563" duration="3167000" />
+      <workItem from="1591975485305" duration="1072000" />
+      <workItem from="1591977011875" duration="97000" />
+      <workItem from="1591981484454" duration="5102000" />
+      <workItem from="1591993198924" duration="2471000" />
+      <workItem from="1592132855611" duration="6029000" />
+      <workItem from="1592147534149" duration="4501000" />
     </task>
     <servers />
   </component>
@@ -101,10 +113,10 @@
       <screen x="0" y="23" width="1440" height="827" />
     </state>
     <state x="221" y="75" key="SettingsEditor/0.23.1440.827@0.23.1440.827" timestamp="1591734394876" />
-    <state x="383" y="172" width="672" height="678" key="search.everywhere.popup" timestamp="1591459793391">
+    <state x="383" y="172" width="672" height="678" key="search.everywhere.popup" timestamp="1591985986926">
       <screen x="0" y="23" width="1440" height="827" />
     </state>
-    <state x="383" y="172" width="672" height="678" key="search.everywhere.popup/0.23.1440.827@0.23.1440.827" timestamp="1591459793391" />
+    <state x="383" y="172" width="672" height="678" key="search.everywhere.popup/0.23.1440.827@0.23.1440.827" timestamp="1591985986926" />
     <state x="383" y="172" width="672" height="678" key="search.everywhere.popup/0.23.1440.828@0.23.1440.828" timestamp="1591370951669" />
   </component>
 </project>

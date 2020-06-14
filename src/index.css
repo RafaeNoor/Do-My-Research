@@ -11,3 +11,21 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+h1 {
+  color: #2b4149;
+  font-size: 100px;
+  border-radius: 100px;
+  font-family: 'Condiment', cursive;
+  border-color: #a32f80;
+}
+
+h2 {
+  color: #2b4149;
+  font-size: 70px;
+  font: bold;
+  border-radius: 40px;
+  border-color: #a32f80;
+}
+
+

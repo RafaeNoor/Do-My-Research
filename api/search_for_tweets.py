@@ -76,11 +76,11 @@ def create_dir_for_phrase(phrase):
 @tweet_search_file.route('/tweet_search/<string:phrase>')
 def search_for_phrase(phrase):
     phrase = phrase.lower()
-    dir_path = create_dir_for_phrase(phrase)
+    dir_path = create_dir_for_phrase(phrase.replace(" ","_"))
 
-    file_name = os.path.join(dir_path,phrase)
+    file_name = os.path.join(dir_path,phrase.replace(" ","_"))
 
-    CMD = 'search_tweets.py --max-results 200 --results-per-call 100 --filter-rule "'+phrase+'" --filename-prefix '+file_name+"_"+randomString()+' --print-stream --credential-file twitter_api_info.yaml'
+    CMD = 'search_tweets.py --max-results 100 --results-per-call 100 --filter-rule "'+phrase+'" --filename-prefix '+file_name+"_"+randomString()+' --print-stream --credential-file twitter_api_info.yaml'
     print(CMD)
     try:
         #sb.call(CMD,shell=True)
@@ -110,7 +110,7 @@ def search_for_phrase(phrase):
 
     print("Combined analysis has {} records".format(len(df)))
 
-    df = df.drop(['Unnamed: 0'],axis=1)
+    #df = df.drop(['Unnamed: 0'],axis=1)
 
     print(dir_path+"/testinggggg.csv")
     df.to_csv(dir_path+"/testinggggg.csv")
@@ -127,7 +127,8 @@ def search_for_phrase(phrase):
 
     return {'data':df.to_dict(),
             'file_paths':file_paths,
-            'analysis_obj': complete_analysis['analysis'],}
+            'analysis_obj': complete_analysis['analysis'],
+            'google_analysis':"hello"}
 
 
 
@@ -229,7 +230,7 @@ def produce_csv(obj,parent_dir,phrase):
 
 
 
-    print(df)
+    #print(df)
     df.to_csv(os.path.join(parent_dir,phrase+"_"+randomString(10)+'.csv'), index=False)
     return df
 

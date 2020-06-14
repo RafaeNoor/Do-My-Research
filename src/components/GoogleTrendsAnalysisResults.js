@@ -15,6 +15,7 @@ class GoogleTrendsAnalysisResults extends React.Component {
             "file_paths": props.file_paths || [],
             "analysis_obj": props.analysis_obj || {},
             "phrase": props.phrase || "NO_PHRASE_SPECIFIED",
+            "mode": props.mode || "trends"
         };
 
         console.log('CREATED TREND RESULT')
@@ -89,14 +90,20 @@ class GoogleTrendsAnalysisResults extends React.Component {
         if(type == "top"){
             title = `Top Trending Related Terms for ${this.state.phrase} across all time`
             key = "top"
-        } else {
+        } else if(type == "rising") {
             title = `Top Trending Related Terms for ${this.state.phrase} as of ${new Date().toDateString()}`;
             key = 'rising';
+        } else if(type == "location"){
+            title = `Top Trending locations for ${this.state.phrase} according to Twitter Analysis`;
+            key = 'location';
+
         }
         //console.log("ANALYSIS OBJ")
         //console.log(this.state.analysis_obj)
 
         let counter = 0;
+        console.log(this.state);
+        console.log(this.state.analysis_obj);
         this.state.analysis_obj[key].forEach(search_obj => {
             let search_term = Object.keys(search_obj)[0];
             console.log(search_obj)
@@ -107,14 +114,17 @@ class GoogleTrendsAnalysisResults extends React.Component {
 
             let card = (<Col>
                 <Card>
+                    <Card.Header as="h5">{search_term}</Card.Header>
                     <Card.Body>{search_obj[search_term]['summary']}
-                        <a href={search_obj[search_term]['citation']}>{search_term + " citation"}</a> </Card.Body>
+                    </Card.Body>
+                    <Card.Footer><a href={search_obj[search_term]['citation']} target={"_blank"}>{search_term + " citation"}</a></Card.Footer>
                 </Card>
 
             </Col>);
-            let figure = (<Col>
+            let figure = (<Col md={"auto"}>
                 <Figure>
                     <Figure.Image
+                        rounded
                         width={600}
                         height={600}
                         src={search_obj[search_term]['img']}
@@ -122,6 +132,7 @@ class GoogleTrendsAnalysisResults extends React.Component {
                     />
                 </Figure>
             </Col>);
+            counter += 1;
             if(counter % 2 == 0){
                 left = figure;
                 right = card;
@@ -133,19 +144,21 @@ class GoogleTrendsAnalysisResults extends React.Component {
 
             //<h3>{search_term}</h3><br/>
             top_entries.push(
-            <Row>
-                <h3>{search_term}</h3><br/>
-                {left}
-                {right}
-            </Row>
+                <div>
+                    <Row>
+                        {left}
+                        {right}
+                    </Row>
+                    <br/>
+                </div>
             );
         })
 
         let result = (
-        <Container fluid>
-            <h2>{title}</h2>
-            {top_entries}
-        </Container>
+            <Container fluid>
+                <h2>{title}</h2>
+                {top_entries}
+            </Container>
         );
 
         return result;
@@ -154,16 +167,28 @@ class GoogleTrendsAnalysisResults extends React.Component {
 
 
     render() {
-        return (
-            <div>
-                <Container fluid>
-                    <h1>Google Trend Analysis!</h1>
-                    {this.createEntry('top')}
-                    <br/>
-                    {this.createEntry('rising')}
-                </Container>
-            </div>
-        );
+        if(this.state.mode == "trends") {
+            return (
+                <div>
+                    <Container fluid>
+                        <h1>Google Trend Analysis!</h1>
+                        {this.createEntry('top')}
+                        <br/>
+                        {this.createEntry('rising')}
+                    </Container>
+                </div>
+            );
+        } else if(this.state.mode == "location") {
+            return (
+                <div>
+                    <Container fluid>
+                        <h1>Google Trend Analysis!</h1>
+                        {this.createEntry('location')}
+                    </Container>
+                </div>
+            );
+
+        }
     }
 }
 

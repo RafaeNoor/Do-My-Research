@@ -7,7 +7,7 @@ import matplotlib
 
 from matplotlib import use
 
-import subprocess as sb
+from google_trend_analysis import search_and_summarize_term
 
 topN = 8
 
@@ -68,8 +68,8 @@ def process_geography(df,gender,parent_dir):
     plt.figure(dpi=350)
     df = df[df['location'] != 'NULL']
     sizes_loc = df['location'].value_counts(normalize=True)
-    print("SIZES LOC")
-    print(sizes_loc)
+    #print("SIZES LOC")
+    #print(sizes_loc)
     #print(sizes_loc[1:topN+1])
 
     fig_loc, ax_loc = plt.subplots()
@@ -85,7 +85,7 @@ def process_geography(df,gender,parent_dir):
 
 # gender_obj = {male: [country1,2,3],...}
 def analyze_geography(gender_obj, n,phrase):
-    print("hello")
+    #print("hello")
     male = gender_obj['male'][:n]
     female = gender_obj['female'][:n]
 
@@ -103,6 +103,7 @@ def analyze_geography(gender_obj, n,phrase):
                                "with frequency of discussion on {} within Twitter users, there seems " \
                                "to be no indication that {} is a gendered issue. ".format(n,phrase,phrase)
         analysis_obj['gendered'] = 0
+
     elif percentage_common >= 0.70:
         analysis_obj['desc'] = "A majority of the top {} geographies are common across Male  " \
                                "and Female Twitter users when discussing {}. As most of the geographies overlap,  " \
@@ -131,6 +132,19 @@ def analyze_geography(gender_obj, n,phrase):
                                ", males from {} and {} lead the discussion.".format(n,phrase,female[0],female[1],male[0],male[1])
 
         analysis_obj['gendered'] = 1
+
+
+    male_top = male[0]
+
+    i = 0
+    while female[i] == male_top:
+        i+=1
+    female_top = female[i]
+
+    m1=search_and_summarize_term(phrase,male_top)
+    f1=search_and_summarize_term(phrase,female_top)
+
+    analysis_obj['google'] = {"location":[m1,f1]}
 
     return analysis_obj
 

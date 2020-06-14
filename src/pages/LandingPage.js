@@ -8,6 +8,7 @@ import Col from "react-bootstrap/Col";
 import Table from "react-bootstrap/Table";
 import TwitterAnalysisResults from "../components/TwitterAnalysisResults";
 import GoogleTrendsAnalysisResults from "../components/GoogleTrendsAnalysisResults";
+import Card from "react-bootstrap/Card";
 
 let firebase_obj = require('../components/Firestore');
 let trend_obj = require('../components/GoogleTrends').trend_obj;
@@ -116,13 +117,11 @@ class LandingPage extends React.Component {
         return (
             <div>
                 <Container fluid>
-
+                    <br/>
                     <Row className="justify-content-md-center">
-                        <h1>Landing Page!</h1>
+                        <h1>Do My Research!</h1>
                     </Row>
-                    <Row className="justify-content-md-center">
-                        <p>The current time is {this.state.currentTime}</p>
-                    </Row>
+                    <br/>
                     <Form.Group>
                         <Row className="justify-content-md-center">
                             <Col>
@@ -137,7 +136,7 @@ class LandingPage extends React.Component {
 
                                     let get_all_results = [];
 
-                                    //get_all_results.push(this.get_twitter_analysis_results(this.state.text));
+                                    get_all_results.push(this.get_twitter_analysis_results(this.state.text));
                                     get_all_results.push(this.get_google_trend_results(this.state.text));
 
                                     Promise.all(get_all_results).then(all_results => {

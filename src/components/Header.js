@@ -38,6 +38,7 @@ class Header extends React.Component {
 
                         </Navbar.Collapse>
                     </Navbar>
+                <br/>
             </div>
         );
     }

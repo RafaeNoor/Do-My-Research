@@ -4,6 +4,8 @@ import Table from "react-bootstrap/Table";
 import Image from "react-bootstrap/Image";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
+import GoogleTrendsAnalysisResults from "./GoogleTrendsAnalysisResults";
+import Card from "react-bootstrap/Card";
 
 //import 'bootstrap/dist/css/bootstrap.min.css';
 class TwitterAnalysisResults extends React.Component {
@@ -65,35 +67,42 @@ class TwitterAnalysisResults extends React.Component {
 
     createImages(filepaths){
 
-
-
         let components = []
 
         let location_component = (
+            <div>
             <Row className={"justify-content-md-center"}>
                 <Col md={'auto'}>
-                    <Image src={filepaths[0]}></Image>
+                    <Image rounded fluid src={filepaths[0]}></Image>
                 </Col>
                 <Col md ={'auto'}>
-                    <Image src={filepaths[1]}></Image>
+                    <Image rounded fluid src={filepaths[1]}></Image>
                 </Col>
-
             </Row>
+                <br/>
+            <Row className={"justify-content-md-center"}>
+                <Card border={"dark"} bg={'dark'} text={'white'}>
+                    <Card.Header as="h5">{"Geographical Analysis"}</Card.Header>
+                    <Card.Body>{this.state.analysis_obj.desc}</Card.Body>
+                </Card>
+            </Row>
+                <br/>
+            </div>
         );
 
         let sentiment_component = (
             <Row className={"justify-content-md-center"}>
                 <Col md={'auto'}>
-                    <Image src={filepaths[2]}></Image>
+                    <Image rounded src={filepaths[2]}></Image>
                 </Col>
                 <Col md ={'auto'}>
-                    <Image src={filepaths[3]}></Image>
+                    <Image rounded src={filepaths[3]}></Image>
                 </Col>
 
             </Row>
         );
 
-        components = [location_component,sentiment_component];
+        components = [location_component,<br/>,sentiment_component];
 
         /*filepaths.forEach(fp => {
             components.push(
@@ -107,15 +116,17 @@ class TwitterAnalysisResults extends React.Component {
 
 
     render() {
+        //<GoogleTrendsAnalysisResults analysis_obj={this.state.analysis_obj.google} phrase={'Locations'}/>
         return (
             <div>
                 <Container fluid>
-                    <h1>Twitter Analysis Result!</h1>
+                    <h2>Twitter Analysis Result!</h2>
                     <br/>
                     {this.createTable(this.state.table_data)}
                     {this.createImages(this.state.file_paths)}
-                    {this.state.analysis_obj.desc}
-
+                    <br/>
+                    <GoogleTrendsAnalysisResults mode={"location"} analysis_obj={this.state.analysis_obj.google} phrase={'Locations'}/>
+                    <br/>
                 </Container>
             </div>
         );
