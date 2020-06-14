@@ -96,7 +96,9 @@ class GoogleTrendsAnalysisResults extends React.Component {
         } else if(type == "location"){
             title = `Top Trending locations for ${this.state.phrase} according to Twitter Analysis`;
             key = 'location';
-
+        } else if(type == "sent_geo"){
+            title = `Pro vs Anti Sentiment locations for ${this.state.phrase} according to Twitter Analysis`;
+            key = 'sent_geo';
         }
         //console.log("ANALYSIS OBJ")
         //console.log(this.state.analysis_obj)
@@ -156,7 +158,7 @@ class GoogleTrendsAnalysisResults extends React.Component {
 
         let result = (
             <Container fluid>
-                <h2>{title}</h2>
+                <h3>{title}</h3>
                 {top_entries}
             </Container>
         );
@@ -182,7 +184,6 @@ class GoogleTrendsAnalysisResults extends React.Component {
             return (
                 <div>
                     <Container fluid>
-                        <h1>Google Trend Analysis!</h1>
                         {this.createEntry('location')}
                     </Container>
                 </div>

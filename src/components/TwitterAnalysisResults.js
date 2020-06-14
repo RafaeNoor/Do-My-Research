@@ -15,6 +15,7 @@ class TwitterAnalysisResults extends React.Component {
             "table_data": props.table_data || {},
             "file_paths": props.file_paths || [],
             "analysis_obj": props.analysis_obj || {},
+            "sent_geo_analysis_obj": props.sent_geo_analysis_obj || {},
         };
 
         console.log(props.file_paths);
@@ -71,21 +72,22 @@ class TwitterAnalysisResults extends React.Component {
 
         let location_component = (
             <div>
-            <Row className={"justify-content-md-center"}>
-                <Col md={'auto'}>
-                    <Image rounded fluid src={filepaths[0]}></Image>
-                </Col>
-                <Col md ={'auto'}>
-                    <Image rounded fluid src={filepaths[1]}></Image>
-                </Col>
-            </Row>
+                <Row className={"justify-content-md-center"}>
+                    <Col md={'auto'}>
+                        <Image rounded fluid src={filepaths[0]}></Image>
+                    </Col>
+                    <Col md ={'auto'}>
+                        <Image rounded fluid src={filepaths[1]}></Image>
+                    </Col>
+                </Row>
                 <br/>
-            <Row className={"justify-content-md-center"}>
-                <Card border={"dark"} bg={'dark'} text={'white'}>
-                    <Card.Header as="h5">{"Geographical Analysis"}</Card.Header>
-                    <Card.Body>{this.state.analysis_obj.desc}</Card.Body>
-                </Card>
-            </Row>
+                <Row className={"justify-content-md-center"}>
+                    <Card>
+                        <Card.Header as="h5">{"Geographical Analysis"}</Card.Header>
+                        <Card.Body>{this.state.analysis_obj.desc}</Card.Body>
+                        <Card.Footer>Analysis using Tweets</Card.Footer>
+                    </Card>
+                </Row>
                 <br/>
             </div>
         );
@@ -102,7 +104,31 @@ class TwitterAnalysisResults extends React.Component {
             </Row>
         );
 
-        components = [location_component,<br/>,sentiment_component];
+        let sentiment_geo_component = (
+            <div>
+                <Row className={"justify-content-md-center"}>
+                    <Col md={'auto'}>
+                        <Image rounded src={filepaths[4]}></Image>
+                    </Col>
+                    <Col md ={'auto'}>
+                        <Image rounded src={filepaths[5]}></Image>
+                    </Col>
+                </Row>
+                <br/>
+                <Row className={"justify-content-md-center"}>
+                    <Card >
+                        <Card.Header as="h5">{"Sentiment Localisation Analysis"}</Card.Header>
+                        <Card.Body>{this.state.sent_geo_analysis_obj.desc}</Card.Body>
+                        <Card.Footer>Analysis using Tweets</Card.Footer>
+                    </Card>
+                </Row>
+
+            </div>
+        );
+
+
+
+        components = [location_component,<br/>,sentiment_component,<br/>,sentiment_geo_component];
 
         /*filepaths.forEach(fp => {
             components.push(
@@ -120,13 +146,16 @@ class TwitterAnalysisResults extends React.Component {
         return (
             <div>
                 <Container fluid>
-                    <h2>Twitter Analysis Result!</h2>
+                    <h1>Twitter Analysis Result!</h1>
                     <br/>
                     {this.createTable(this.state.table_data)}
                     {this.createImages(this.state.file_paths)}
                     <br/>
                     <GoogleTrendsAnalysisResults mode={"location"} analysis_obj={this.state.analysis_obj.google} phrase={'Locations'}/>
                     <br/>
+                    <GoogleTrendsAnalysisResults mode={"sent_geo"} analysis_obj={this.state.sent_geo_analysis_obj.twitter} phrase={'Locations and Sentiment'}/>
+                    <br/>
+
                 </Container>
             </div>
         );

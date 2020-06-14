@@ -8,7 +8,7 @@ import Col from "react-bootstrap/Col";
 import Table from "react-bootstrap/Table";
 import TwitterAnalysisResults from "../components/TwitterAnalysisResults";
 import GoogleTrendsAnalysisResults from "../components/GoogleTrendsAnalysisResults";
-import Card from "react-bootstrap/Card";
+import Spinner from "react-bootstrap/Spinner";
 
 let firebase_obj = require('../components/Firestore');
 let trend_obj = require('../components/GoogleTrends').trend_obj;
@@ -103,7 +103,8 @@ class LandingPage extends React.Component {
         console.log(data.file_paths);
         let component = (
             <Container fluid>
-                <TwitterAnalysisResults table_data={data.data} file_paths={data.file_paths} analysis_obj={data.analysis_obj} />
+                <TwitterAnalysisResults table_data={data.data} file_paths={data.file_paths} analysis_obj={data.analysis_obj}
+                sent_geo_analysis_obj = {data.sent_geo_analysis_obj}/>
             </Container>
 
         );
@@ -125,12 +126,13 @@ class LandingPage extends React.Component {
                     <Form.Group>
                         <Row className="justify-content-md-center">
                             <Col>
-                                <Form.Control size="lg" type="text" placeholder="Enter phrase to process tweet" onChange={
+                                <Form.Control size="lg" type="text" placeholder="Enter phrase to Research" onChange={
                                     e=>this.state.text = (e.target.value)} />
                             </Col>
                             <Col md={"auto"}>
 
-                                <Button onClick={() => {
+                                <Button variant={"dark"} onClick={() => {
+                                    this.setState({"summary":<Spinner animation={"border"} size={"lg"} /> })
                                     console.log(this.state.text);
                                     console.log('Checking related terms...');
 
@@ -150,7 +152,7 @@ class LandingPage extends React.Component {
                         </Row>
 
                     </Form.Group>
-                    <Button onClick={evt => {
+                    <Button variant={"dark"} onClick={evt => {
                         //let html = document.getElementsByTagName('html')[0]
                         console.log('printing html')
                         //console.log(JSON.stringify(document));
@@ -172,6 +174,8 @@ class LandingPage extends React.Component {
 
 
                     }}>Save PDF</Button>
+                    <br/>
+                    <br/>
                     {this.state.summary}
 
                 </Container>

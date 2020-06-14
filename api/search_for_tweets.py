@@ -128,6 +128,7 @@ def search_for_phrase(phrase):
     return {'data':df.to_dict(),
             'file_paths':file_paths,
             'analysis_obj': complete_analysis['analysis'],
+            'sent_geo_analysis_obj': complete_analysis['geo_sent_analysis'],
             'google_analysis':"hello"}
 
 
