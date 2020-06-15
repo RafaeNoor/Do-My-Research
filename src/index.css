@@ -29,6 +29,10 @@ h2 {
 }
 
 
-.button_style {
-  background-color:#2b4149;
+.white_text_style {
+    color: white;
+}
+
+a {
+  color: #467080;
 }

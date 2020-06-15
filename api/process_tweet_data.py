@@ -192,7 +192,7 @@ def sentiment_geo(df,parent_dir,topic):
     neg_list = sizes_loc_anti.index.to_list()
     fig_loc_anti, ax_loc_anti = plt.subplots()
     ax_loc_anti.pie(sizes_loc_anti[:topN], labels=sizes_loc_anti.index.to_list()[:topN], autopct='%1.1f%%', shadow=True)
-    ax_loc.axis('equal')
+    ax_loc_anti.axis('equal')
     plt.title("Location of the top {} most common \nlocations for with {} sentiment on {}".format(topN,"Negative",topic),y=-0.1)
     #plt.show()
     plt.savefig(os.path.join(parent_dir,topic+"_"+"neg"+"_geo.png"))
@@ -201,7 +201,7 @@ def sentiment_geo(df,parent_dir,topic):
 
 
     return {"pro": {"path":os.path.join(parent_dir,topic+"_"+"pro"+"_geo.png"), "list":pro_list},
-            "anti":{"path":os.path.join(parent_dir,topic+"_"+"pro"+"_geo.png"), "list":neg_list}}
+            "anti":{"path":os.path.join(parent_dir,topic+"_"+"neg"+"_geo.png"), "list":neg_list}}
 
 
 

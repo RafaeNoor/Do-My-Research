@@ -188,6 +188,14 @@ class GoogleTrendsAnalysisResults extends React.Component {
                     </Container>
                 </div>
             );
+        } else if(this.state.mode == "sent_geo"){
+            return (
+                <div>
+                    <Container fluid>
+                        {this.createEntry('sent_geo')}
+                    </Container>
+                </div>
+            );
 
         }
     }

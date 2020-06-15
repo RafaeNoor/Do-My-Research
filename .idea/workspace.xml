@@ -3,13 +3,12 @@
   <component name="ChangeListManager">
     <list default="true" id="f35dfca5-6b06-4331-ac3b-2f83ca7fc56d" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/google_search_term.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/google_search_term.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/google_trend_analysis.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/google_trend_analysis.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api/process_tweet_data.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/process_tweet_data.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api/search_for_tweets.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/search_for_tweets.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/GoogleTrendsAnalysisResults.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/GoogleTrendsAnalysisResults.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/TwitterAnalysisResults.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/TwitterAnalysisResults.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/LandingPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/LandingPage.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/AboutPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/AboutPage.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -19,8 +18,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Python Script" />
         <option value="JavaScript File" />
+        <option value="Python Script" />
       </list>
     </option>
   </component>
@@ -91,7 +90,11 @@
       <workItem from="1592132855611" duration="6029000" />
       <workItem from="1592147534149" duration="4776000" />
       <workItem from="1592159804500" duration="6000" />
-      <workItem from="1592163019664" duration="4261000" />
+      <workItem from="1592163019664" duration="4331000" />
+      <workItem from="1592209494817" duration="1055000" />
+      <workItem from="1592211427650" duration="125000" />
+      <workItem from="1592211711172" duration="4424000" />
+      <workItem from="1592254493453" duration="56000" />
     </task>
     <servers />
   </component>

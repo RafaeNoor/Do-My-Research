@@ -74,11 +74,13 @@ def search_and_summarize_term(phrase,related_term):
                 if summary == []: # if PyDict failed
                     summary = summarize(url,5)['summary']
                     citation_url = url
+                else:
+                    break
 
             else:
                 summary = summarize(url,SUMMARY_LENGTH)['summary']
 
-            if summary != []:
+            if len(summary) >= SUMMARY_LENGTH:
                 break
             else:
                 url_index += 1

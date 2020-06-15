@@ -80,10 +80,10 @@ def search_for_phrase(phrase):
 
     file_name = os.path.join(dir_path,phrase.replace(" ","_"))
 
-    CMD = 'search_tweets.py --max-results 100 --results-per-call 100 --filter-rule "'+phrase+'" --filename-prefix '+file_name+"_"+randomString()+' --print-stream --credential-file twitter_api_info.yaml'
+    CMD = 'search_tweets.py --max-results 1000 --results-per-call 100 --filter-rule "'+phrase+'" --filename-prefix '+file_name+"_"+randomString()+' --print-stream --credential-file twitter_api_info.yaml'
     print(CMD)
     try:
-        #sb.call(CMD,shell=True)
+        sb.call(CMD,shell=True)
         print("Hello")
     except:
         print("Used Up Quota")
