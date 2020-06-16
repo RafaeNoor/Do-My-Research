@@ -3,12 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="f35dfca5-6b06-4331-ac3b-2f83ca7fc56d" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/google_trend_analysis.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/google_trend_analysis.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/process_tweet_data.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/process_tweet_data.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/search_for_tweets.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/search_for_tweets.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/GoogleTrendsAnalysisResults.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/GoogleTrendsAnalysisResults.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/AboutPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/AboutPage.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/LandingPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/LandingPage.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -94,7 +89,8 @@
       <workItem from="1592209494817" duration="1055000" />
       <workItem from="1592211427650" duration="125000" />
       <workItem from="1592211711172" duration="4424000" />
-      <workItem from="1592254493453" duration="56000" />
+      <workItem from="1592254493453" duration="97000" />
+      <workItem from="1592298305220" duration="631000" />
     </task>
     <servers />
   </component>

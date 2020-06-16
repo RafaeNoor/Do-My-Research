@@ -27,6 +27,9 @@ class LandingPage extends React.Component {
             'currentTime':0,
             'text':"",
             'summary':"",
+            'do_twitter': false,
+            'do_google': false,
+            'do_reddit': false,
         };
 
     }
@@ -138,8 +141,13 @@ class LandingPage extends React.Component {
 
                                     let get_all_results = [];
 
-                                    get_all_results.push(this.get_twitter_analysis_results(this.state.text));
-                                    get_all_results.push(this.get_google_trend_results(this.state.text));
+                                    if (this.state.do_twitter) {
+                                        get_all_results.push(this.get_twitter_analysis_results(this.state.text));
+                                    }
+
+                                    if (this.state.do_google) {
+                                        get_all_results.push(this.get_google_trend_results(this.state.text));
+                                    }
 
                                     Promise.all(get_all_results).then(all_results => {
                                         this.setState({'summary':all_results});
@@ -149,6 +157,11 @@ class LandingPage extends React.Component {
                                 }
                                 }>Submit</Button>
                             </Col>
+                        </Row>
+                        <Row className="justify-content-md-center">
+                            <Form.Check inline label={"Twitter Analysis"} onClick = {()=> this.state.do_twitter = !this.state.do_twitter } type={"checkbox"}/>
+                            <Form.Check inline label={"Google Trends Analysis"} onClick = {()=> this.state.do_google = !this.state.do_google} type={"checkbox"}/>
+                            <Form.Check inline label={"Reddit Analysis"} onClick = {()=> this.state.do_reddit = !this.state.do_reddit} type={"checkbox"}/>
                         </Row>
 
                     </Form.Group>
