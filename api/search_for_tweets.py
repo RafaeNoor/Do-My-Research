@@ -70,6 +70,7 @@ def create_dir_for_phrase(phrase):
     if not os.path.isdir(os.path.join("static",phrase)):
         os.mkdir(os.path.join("static",phrase))
 
+
     return os.path.join("static",phrase)
 
 

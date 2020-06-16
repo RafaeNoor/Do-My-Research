@@ -4,6 +4,38 @@ import json
 from time import sleep
 
 import pandas as pd
+import numpy as np
+
+from tensorflow.keras.preprocessing.sequence import pad_sequences
+import tensorflow as tf
+from tensorflow.keras import backend
+
+backend.clear_session()
+
+import os
+
+from flask import Blueprint, render_template, session,abort
+reddit_trend_analysis_file = Blueprint('reddit_trend_analysis_file',__name__)
+
+from search_for_tweets import gender_detector, initialize_sentiment_classifier,preprocessing
+
+
+from process_reddit_data import do_complete_analysis
+
+
+def create_dir_for_phrase(phrase):
+    if not os.path.isdir("static"):
+        os.mkdir("static")
+
+    if not os.path.isdir(os.path.join("static",phrase)):
+        os.mkdir(os.path.join("static",phrase))
+
+    if not os.path.isdir(os.path.join("static",phrase,"reddit")):
+        os.mkdir(os.path.join("static",phrase,"reddit"))
+
+
+
+    return os.path.join("static",phrase,"reddit")
 
 
 fields = [
@@ -21,9 +53,9 @@ fields = [
 
 sorts = [
     "new",
-    "hot",
-    "relevance",
-    "top",
+#    "hot",
+#    "relevance",
+#    "top",
 ]
 
 user_fields =  [
@@ -42,7 +74,7 @@ def search_reddit(phrase,sort,cycles):
     sleep_time = 3
     for c in range(0,cycles):
         while True:
-            res = requests.get("http://www.reddit.com/search.json?q={}&sort={}&limit=5".format(phrase,sort))
+            res = requests.get("http://www.reddit.com/search.json?q={}&sort={}&limit=100".format(phrase,sort))
             res_json = res.json()
             if "error" in res_json:
                 print("[",sort,", cycle:",c,"]","Retrying...")
@@ -71,9 +103,9 @@ def filter_fields(ls_obj,keys):
         for idx,entry in enumerate(children):
             other.append({key: entry["data"][key] for key in keys})
 
-        other_with_user_info = get_all_users_info(other)
+        #other = get_all_users_info(other)
 
-        df = pd.DataFrame.from_records(other_with_user_info)
+        df = pd.DataFrame.from_records(other)
         #df.to_csv("res_other.csv")
 
         if obj_idx == 0:
@@ -81,14 +113,18 @@ def filter_fields(ls_obj,keys):
         else:
             comb_df = pd.concat([comb_df,df])
 
-    print(comb_df)
+    #print(comb_df)
 
     return comb_df
 
 
 
-
+@reddit_trend_analysis_file.route('/reddit_trend/<string:phrase>')
 def get_reddit_posts(phrase):
+
+    parent_dir = create_dir_for_phrase(phrase.replace(" ","_"))
+    sent_classifier, tk_obj = initialize_sentiment_classifier()
+
     reddit_data = []
 
     print("Fetching posts...")
@@ -98,11 +134,49 @@ def get_reddit_posts(phrase):
 
     df = filter_fields(reddit_data,fields)
 
-    df.to_csv("{}_reddit.csv".format(phrase))
+    df = add_gender_and_sentiment(df,sent_classifier,tk_obj)
+
+    df.to_csv(os.path.join(parent_dir,"{}_reddit.csv".format(phrase)))
+    print(df)
     print("Done with fetching reddit posts")
 
+    complete_analysis = do_complete_analysis(df,parent_dir,phrase)
 
-#get_reddit_posts("racism")
+    return {"analysis_obj":complete_analysis}
+
+
+
+def add_gender_and_sentiment(df,sent_classifier,tk_obj):
+    sentences = df[['title']]
+    to_predict = preprocessing(sentences,'title')
+    sequences_to_pred = tk_obj.texts_to_sequences(to_predict)
+    to_predict_numeric=pad_sequences(sequences_to_pred,maxlen=200,padding='post')
+
+    graph = tf.compat.v1.get_default_graph()#get_default_graph()
+    #print(to_predict_numeric[19])
+
+    #TODO: HACKish, add oov token instead
+    for i in range(0,to_predict_numeric.shape[0]):
+        for j in range(0,to_predict_numeric.shape[1]):
+            if to_predict_numeric[i,j] >= 137252 :
+                to_predict_numeric[i,j] = 0
+
+    with graph.as_default():
+        sentiments = sent_classifier.predict( to_predict_numeric ).tolist()
+        sentiments = [np.argmax(sent) for sent in sentiments]
+
+    df['sentiment'] = sentiments
+
+
+    get_gender = lambda x: gender_detector.get_gender(x.split(" ")[0].lower())
+
+    print()
+    df['gender'] = df['author'].apply(get_gender)
+
+
+    return df
+
+
 
 def get_all_users_info(ls_obj):
     print("GETTING USER INFO")

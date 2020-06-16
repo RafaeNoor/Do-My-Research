@@ -7,6 +7,7 @@ from google_search_term import google_search_file
 from search_for_tweets import tweet_search_file
 from firebase_storage import firebase_storage_file
 from google_trend_analysis import google_trend_analysis_file
+from search_for_reddit import reddit_trend_analysis_file
 
 import os
 import pdfkit
@@ -18,7 +19,7 @@ app.register_blueprint(google_search_file)
 app.register_blueprint(tweet_search_file)
 app.register_blueprint(firebase_storage_file)
 app.register_blueprint(google_trend_analysis_file)
-
+app.register_blueprint(reddit_trend_analysis_file)
 @app.route('/time')
 def get_current_time():
     print(os.getenv('PUBLIC_URL'))

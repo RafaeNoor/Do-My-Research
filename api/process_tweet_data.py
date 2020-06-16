@@ -9,12 +9,13 @@ from matplotlib import use
 
 from google_trend_analysis import search_and_summarize_term
 
+
 topN = 8
 
 use('agg')
 
 def process_gender(df):
-    males = df[df['gender'].isin(['male','mostly_male','andy'])]
+    males = df[df['gender'].isin(['male','mostly_male','andy','unknown'])]
     females = df[df['gender'].isin(['female','mostly_female'])]
 
     #print("# Males:\t",len(males))
@@ -161,11 +162,12 @@ def process_sentiment(df,gender,parent_dir,topic):
     plt.figure(dpi=350)
     labels = ['Negative', 'Positive']
     sizes = df['sentiment'].value_counts(normalize=True)
+    print(sizes)
     fig, ax = plt.subplots()
     ax.pie(sizes, labels=labels, autopct='%1.1f%%', shadow=True)
     ax.axis('equal')
     plt.title("Distribution of {} sentiment\n for {}".format(gender,topic))
-    plt.show()
+    #plt.show()
     plt.savefig(os.path.join(parent_dir,gender+"_"+topic+".png"))
     return os.path.join(parent_dir,gender+"_"+topic+".png")
 

@@ -27,7 +27,7 @@ class GoogleTrends {
 
 
 
-        let res = await fetch(`/testing/${query}`).then(res => res.json());
+        let res = await fetch(`/google_trend/${query}`).then(res => res.json());
         //.then(data => {
         //console.log(data)
         //});

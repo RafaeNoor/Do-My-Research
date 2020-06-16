@@ -9,6 +9,7 @@ import Table from "react-bootstrap/Table";
 import TwitterAnalysisResults from "../components/TwitterAnalysisResults";
 import GoogleTrendsAnalysisResults from "../components/GoogleTrendsAnalysisResults";
 import Spinner from "react-bootstrap/Spinner";
+import RedditAnalysisResults from "../components/RedditAnalysisResults";
 
 let firebase_obj = require('../components/Firestore');
 let trend_obj = require('../components/GoogleTrends').trend_obj;
@@ -85,6 +86,8 @@ class LandingPage extends React.Component {
         );
     }
 
+
+
     async get_google_trend_results(phrase){
         let res = await trend_obj.get_related_terms(phrase);
         return (<GoogleTrendsAnalysisResults
@@ -115,6 +118,18 @@ class LandingPage extends React.Component {
         return component;
 
     }
+
+    async get_reddit_analysis_results(phrase) {
+        let data = await fetch(`/reddit_trend/${phrase}`).then(res => res.json());
+
+        let component = (
+            <RedditAnalysisResults phrase={phrase} analysis_obj={data['analysis_obj']}/>
+        );
+
+        return component;
+    }
+
+
 
 
     render() {
@@ -149,6 +164,10 @@ class LandingPage extends React.Component {
                                         get_all_results.push(this.get_google_trend_results(this.state.text));
                                     }
 
+                                    if (this.state.do_reddit) {
+                                        get_all_results.push(this.get_reddit_analysis_results(this.state.text));
+                                    }
+
                                     Promise.all(get_all_results).then(all_results => {
                                         this.setState({'summary':all_results});
                                     });
@@ -158,6 +177,7 @@ class LandingPage extends React.Component {
                                 }>Submit</Button>
                             </Col>
                         </Row>
+                        <br/>
                         <Row className="justify-content-md-center">
                             <Form.Check inline label={"Twitter Analysis"} onClick = {()=> this.state.do_twitter = !this.state.do_twitter } type={"checkbox"}/>
                             <Form.Check inline label={"Google Trends Analysis"} onClick = {()=> this.state.do_google = !this.state.do_google} type={"checkbox"}/>
@@ -165,27 +185,12 @@ class LandingPage extends React.Component {
                         </Row>
 
                     </Form.Group>
+
                     <Button variant={"dark"} onClick={evt => {
-                        //let html = document.getElementsByTagName('html')[0]
                         console.log('printing html')
-                        //console.log(JSON.stringify(document));
                         let html_str = new XMLSerializer().serializeToString(document);
-                        //let html = fs.readFileSync('index.html','utf8');
-                        /*fetch(`/read_html/${html_str}`).then(res => res.json()).then(data => {
-                            console.log('new file created');
-                        });*/
-                        //////////////////window.print();
-                        //save_pdf();
-                        //pdf.create(html_str).toFile('out.pdf',()=>{});
                         alert('Yet to implement properly, why not use your browsers in the meal while!')
                         window.print();
-
-
-
-
-
-
-
                     }}>Save PDF</Button>
                     <br/>
                     <br/>

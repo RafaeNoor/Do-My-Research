@@ -19,7 +19,7 @@ import json
 TOP_N = 3
 SUMMARY_LENGTH = 8
 
-@google_trend_analysis_file.route('/testing/<string:phrase>')
+@google_trend_analysis_file.route('/google_trend/<string:phrase>')
 def get_related_terms(phrase):
     pytrends.build_payload(kw_list=[phrase])
     df = pytrends.related_queries()
