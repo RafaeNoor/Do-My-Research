@@ -118,6 +118,7 @@ class GoogleTrendsAnalysisResults extends React.Component {
                 <Card>
                     <Card.Header as="h5">{search_term}</Card.Header>
                     <Card.Body>{search_obj[search_term]['summary']}
+                        {search_obj[search_term]['citation']}
                     </Card.Body>
                     <Card.Footer><a href={search_obj[search_term]['citation']} target={"_blank"}>{search_term + " citation"}</a></Card.Footer>
                 </Card>

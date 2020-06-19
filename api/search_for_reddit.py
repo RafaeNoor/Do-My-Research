@@ -8,9 +8,9 @@ import numpy as np
 
 from tensorflow.keras.preprocessing.sequence import pad_sequences
 import tensorflow as tf
-from tensorflow.keras import backend
+#from tensorflow.keras import backend
 
-backend.clear_session()
+#backend.clear_session()
 
 import os
 
@@ -53,7 +53,7 @@ fields = [
 
 sorts = [
     "new",
-#    "hot",
+    "hot",
 #    "relevance",
 #    "top",
 ]
@@ -74,7 +74,7 @@ def search_reddit(phrase,sort,cycles):
     sleep_time = 3
     for c in range(0,cycles):
         while True:
-            res = requests.get("http://www.reddit.com/search.json?q={}&sort={}&limit=100".format(phrase,sort))
+            res = requests.get("http://www.reddit.com/search.json?q={}&sort={}&limit=25".format(phrase,sort))
             res_json = res.json()
             if "error" in res_json:
                 print("[",sort,", cycle:",c,"]","Retrying...")
@@ -151,6 +151,7 @@ def add_gender_and_sentiment(df,sent_classifier,tk_obj):
     to_predict = preprocessing(sentences,'title')
     sequences_to_pred = tk_obj.texts_to_sequences(to_predict)
     to_predict_numeric=pad_sequences(sequences_to_pred,maxlen=200,padding='post')
+
 
     graph = tf.compat.v1.get_default_graph()#get_default_graph()
     #print(to_predict_numeric[19])

@@ -44,8 +44,12 @@ class GoogleTrends {
 
 
 
+export default GoogleTrends;
+
+/*
 let trend_obj = new GoogleTrends();
 
 module.exports = {
     'trend_obj':trend_obj,
 }
+ */

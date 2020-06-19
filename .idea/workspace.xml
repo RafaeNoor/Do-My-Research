@@ -4,11 +4,15 @@
     <list default="true" id="f35dfca5-6b06-4331-ac3b-2f83ca7fc56d" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api/api.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/api.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/google_trend_analysis.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/google_trend_analysis.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/process_tweet_data.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/process_tweet_data.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/process_reddit_data.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/process_reddit_data.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api/search_for_reddit.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/search_for_reddit.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api/search_for_tweets.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/search_for_tweets.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/FirebaseConfig.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/FirebaseConfig.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Firestore.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Firestore.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/GoogleTrends.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/GoogleTrends.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/GoogleTrendsAnalysisResults.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/GoogleTrendsAnalysisResults.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/LandingPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/LandingPage.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -97,7 +101,10 @@
       <workItem from="1592211711172" duration="4424000" />
       <workItem from="1592254493453" duration="97000" />
       <workItem from="1592298305220" duration="706000" />
-      <workItem from="1592337929542" duration="3991000" />
+      <workItem from="1592337929542" duration="4085000" />
+      <workItem from="1592399236227" duration="2472000" />
+      <workItem from="1592565210682" duration="1632000" />
+      <workItem from="1592575218710" duration="3162000" />
     </task>
     <servers />
   </component>

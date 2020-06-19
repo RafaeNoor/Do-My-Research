@@ -13,7 +13,7 @@ import os
 import pdfkit
 
 
-app = Flask(__name__)
+app = Flask(__name__,static_folder='../build', static_url_path='/')
 app.register_blueprint(summarize_file)
 app.register_blueprint(google_search_file)
 app.register_blueprint(tweet_search_file)
@@ -34,3 +34,5 @@ def read_html(html):
 
 
     return {"msg":"completed"}
+
+

@@ -16,7 +16,10 @@ import AboutPage from "./pages/AboutPage";
 import LandingPage from "./pages/LandingPage";
 import Header from "./components/Header";
 
-let firebase_obj = require('./components/Firestore');
+// const firebase_obj = require('./components/Firestore');
+import Firestore from "./components/Firestore";
+
+let firebase_obj = new Firestore();
 
 function App() {
     /*

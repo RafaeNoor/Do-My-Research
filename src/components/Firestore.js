@@ -1,4 +1,4 @@
-let firebase_obj = require('../FirebaseConfig');
+const firebase_obj = require('../FirebaseConfig');
 
 
 function union_arrays (x, y) {
@@ -127,9 +127,18 @@ class Firestore {
 
 }
 
+//let firebase_obj = new Firestore();
 
+export default  Firestore;
+
+/*
+export {
+    firebase_obj
+}*/
+//export default Firestore;
+/*
 module.exports = {
-    'firestore': new Firestore(),
-}
+    'firestore': firestore,
+}*/
 
 

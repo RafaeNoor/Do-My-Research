@@ -10,10 +10,14 @@ import TwitterAnalysisResults from "../components/TwitterAnalysisResults";
 import GoogleTrendsAnalysisResults from "../components/GoogleTrendsAnalysisResults";
 import Spinner from "react-bootstrap/Spinner";
 import RedditAnalysisResults from "../components/RedditAnalysisResults";
+import Firestore from "../components/Firestore";
+import GoogleTrends from "../components/GoogleTrends";
 
-let firebase_obj = require('../components/Firestore');
-let trend_obj = require('../components/GoogleTrends').trend_obj;
+//const firebase_obj = require('../components/Firestore');
+let trend_obj = new GoogleTrends();//require('../components/GoogleTrends').trend_obj;
 
+
+let firebase_obj = new Firestore();
 
 //let pdf = require('html-pdf');
 let html2canvas = require('html2canvas')
@@ -90,8 +94,10 @@ class LandingPage extends React.Component {
 
     async get_google_trend_results(phrase){
         let res = await trend_obj.get_related_terms(phrase);
+        console.log("# Google Analysis Done")
         return (<GoogleTrendsAnalysisResults
             analysis_obj={res} phrase={phrase} />);
+
     }
 
     async get_twitter_analysis_results(phrase){
@@ -115,6 +121,7 @@ class LandingPage extends React.Component {
 
         );
 
+        console.log("# Twitter Analysis Done")
         return component;
 
     }
@@ -125,6 +132,8 @@ class LandingPage extends React.Component {
         let component = (
             <RedditAnalysisResults phrase={phrase} analysis_obj={data['analysis_obj']}/>
         );
+
+        console.log("# Reddit Analysis Done")
 
         return component;
     }
