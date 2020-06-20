@@ -10,7 +10,6 @@ from google_trend_analysis import google_trend_analysis_file
 from search_for_reddit import reddit_trend_analysis_file
 
 import os
-import pdfkit
 
 
 app = Flask(__name__,static_folder='../build', static_url_path='/')
@@ -20,6 +19,7 @@ app.register_blueprint(tweet_search_file)
 app.register_blueprint(firebase_storage_file)
 app.register_blueprint(google_trend_analysis_file)
 app.register_blueprint(reddit_trend_analysis_file)
+
 @app.route('/time')
 def get_current_time():
     print(os.getenv('PUBLIC_URL'))
@@ -32,7 +32,8 @@ def read_html(html):
     print(html)
     #pdfkit.from_file('../public/index.html','static/out.pdf')
 
-
     return {"msg":"completed"}
 
+if __name__ == '__main__':
+    app.run(debug=True,host='0.0.0.0',port=int(os.environ.get('PORT',8080)))
 

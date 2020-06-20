@@ -101,7 +101,7 @@ class LandingPage extends React.Component {
     }
 
     async get_twitter_analysis_results(phrase){
-        let links = await firebase_obj.firestore.get_phrase_csvs(phrase);
+        let links = await firebase_obj.get_phrase_csvs(phrase);
         //console.log(`Links: ${JSON.stringify(links)}`);
         let promises = [];
         links.forEach(link => {
