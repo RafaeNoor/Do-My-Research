@@ -6,6 +6,12 @@
 The project leverages various Python and NodeJS depedencies. 
 
     pip install -r requirements.txt
+    (sudo) npm install
+   
+A bash script is provided to automatically set up the environment, in addition to
+downloading the large files unable to be kept on GitHub.
+
+    bash ./build.sh
    
 ## Running Do My Research
 Open two terminal instances from the root of this project and run:
