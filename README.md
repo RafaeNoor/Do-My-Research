@@ -29,4 +29,4 @@ The work flow of the application can be explained via the following workflow dia
 
 ![Work Flow Diagram](public/workflow.png)
 
-Sample Files Can be found at: (Do My Research Files)[https://drive.google.com/drive/folders/10nEaukzvPvrtr6EXu6_dMiiHzzx47IE-?usp=sharing]
+Sample Files Can be found at: [Do My Research Files](https://drive.google.com/drive/folders/10nEaukzvPvrtr6EXu6_dMiiHzzx47IE-?usp=sharing)
